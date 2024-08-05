@@ -338,11 +338,9 @@ class _DashboardPageState extends State<DashboardPage> {
                                   color: isHomeSelected
                                       ? Colors.blueAccent
                                       : Colors.blueAccent),
-                              label: const Text(
+                              label:  Text(
                                 'Home',
-                                style: TextStyle(
-                                  color: Colors.blueAccent,
-                                ),
+                                style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -396,7 +394,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               Icon(Icons.image_outlined, color: Colors.indigo[900]),
                               label: Text(
                                 'Products',
-                                style: TextStyle(color: Colors.indigo[900]),
+                                  style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -416,7 +414,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   color: Colors.indigo[900]),
                               label: Text(
                                 'Orders',
-                                style: TextStyle(color: Colors.indigo[900]),
+                                  style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -427,7 +425,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   color: Colors.blue[900]),
                               label: Text(
                                 'Delivery',
-                                style: TextStyle(color: Colors.indigo[900]),
+                                  style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -438,7 +436,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   color: Colors.blue[900]),
                               label: Text(
                                 'Invoice',
-                                style: TextStyle(color: Colors.indigo[900]),
+                                style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -449,37 +447,37 @@ class _DashboardPageState extends State<DashboardPage> {
                               Icon(Icons.payment_outlined, color: Colors.blue[900]),
                               label: Text(
                                 'Payment',
-                                style: TextStyle(color: Colors.indigo[900]),
+                                style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
                             TextButton.icon(
                               onPressed: () {
-                                context.go('/:Home/:Return');
+                                context.go('/Home/Return');
                                // context.go('/dashboard/return/:return');
-                                Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation, secondaryAnimation) =>
-                                    const Returnpage(),
-                                    transitionDuration:
-                                    const Duration(milliseconds: 50),
-                                    transitionsBuilder: (context, animation,
-                                        secondaryAnimation, child) {
-                                      return FadeTransition(
-                                        opacity: animation,
-                                        child: child,
-                                      );
-                                    },
-                                  ),
-                                );
+                               //  Navigator.push(
+                               //    context,
+                               //    PageRouteBuilder(
+                               //      pageBuilder:
+                               //          (context, animation, secondaryAnimation) =>
+                               //      const Returnpage(),
+                               //      transitionDuration:
+                               //      const Duration(milliseconds: 50),
+                               //      transitionsBuilder: (context, animation,
+                               //          secondaryAnimation, child) {
+                               //        return FadeTransition(
+                               //          opacity: animation,
+                               //          child: child,
+                               //        );
+                               //      },
+                               //    ),
+                               //  );
                               },
                               icon:
                               Icon(Icons.backspace_sharp, color: Colors.blue[900]),
                               label: Text(
                                 'Return',
-                                style: TextStyle(color: Colors.indigo[900]),
+                                style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -488,7 +486,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               icon: Icon(Icons.insert_chart, color: Colors.blue[900]),
                               label: Text(
                                 'Reports',
-                                style: TextStyle(color: Colors.indigo[900]),
+                                style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                           ],
@@ -580,7 +578,7 @@ class _DashboardPageState extends State<DashboardPage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(top:10,right: 100),
+                                  padding: const EdgeInsets.only(top:30,right: 100),
                                   child: DecoratedBox(
                                     decoration: BoxDecoration(
                                       border: Border.all(
@@ -706,7 +704,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                                           child: Text(
                                                             'Open Orders',
                                                             style:
-                                                            TextStyle(fontSize: 12, color: Colors.grey),
+                                                            TextStyle(fontSize: 15, color: Colors.grey),
                                                           ),
                                                         ),
                                                       ],
@@ -763,7 +761,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                                             child: Text(
                                                               'Open Invoices',
                                                               style:
-                                                              TextStyle(fontSize: 12, color: Colors.grey),
+                                                              TextStyle(fontSize: 15, color: Colors.grey),
                                                             ),
                                                           )
                                                         ],
@@ -821,7 +819,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                                             child: Text(
                                                               'Available Credit Limit',
                                                               style:
-                                                              TextStyle(fontSize: 12, color: Colors.grey),
+                                                              TextStyle(fontSize: 15, color: Colors.grey),
                                                             ),
                                                           )
                                                         ],
@@ -879,7 +877,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                                             child: Text(
                                                               'Order Completed',
                                                               style:
-                                                              TextStyle(fontSize: 12, color: Colors.grey),
+                                                              TextStyle(fontSize: 15, color: Colors.grey),
                                                             ),
                                                           )
                                                         ],
@@ -979,18 +977,20 @@ class _DashboardPageState extends State<DashboardPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
-                      width: maxWidth1 * 0.315,
+                      width: maxWidth1 * 0.259,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(4),
-                        border: Border.all(color: Colors.grey[100]!),
+                        border: Border.all(color: Colors.blue),
                       ),
                       child: TextFormField(
                         decoration: const InputDecoration(
                           hintText: 'Search',
+                          hintStyle: TextStyle(color: Colors.blueGrey),
                           contentPadding: EdgeInsets.all(8),
-                          border: OutlineInputBorder(),
-                          suffixIcon: Icon(Icons.search_outlined),
+                          border: InputBorder.none,
+
+                          suffixIcon: Icon(Icons.search_outlined,color: Colors.blue,),
                         ),
                         onChanged: _updateSearch,
                       ),
@@ -1008,21 +1008,25 @@ class _DashboardPageState extends State<DashboardPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: maxWidth1 * 0.15,
+                          width: maxWidth1 * 0.125,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(2),
-                            border: Border.all(color: Colors.grey),
+                            border: Border.all(color: Colors.blue),
                           ),
                           child: DropdownButtonFormField<String>(
                             decoration: const InputDecoration(
                               contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10),
+                              EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                               border: InputBorder.none,
                               filled: true,
                               fillColor: Colors.white,
-                              hintText: 'Filter I',
+                              suffixIcon: Padding(
+                                padding: EdgeInsets.only(right: 28),
+                                child: const Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blueAccent,size: 16,),
+                              ),
                             ),
+                            icon: Container(),
                             value: dropdownValue1,
                             onChanged: (String? newValue) {
                               setState(() {
@@ -1037,7 +1041,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
-                                child: Text(value),
+                                child: Text(value,style: TextStyle(fontSize: 15,color: Colors.blueGrey),),
                               );
                             }).toList(),
                           ),
@@ -1053,21 +1057,25 @@ class _DashboardPageState extends State<DashboardPage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          width: maxWidth1 * 0.15,
+                          width: maxWidth1 * 0.125,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(2),
-                            border: Border.all(color: Colors.grey),
+                            border: Border.all(color: Colors.blue),
                           ),
                           child: DropdownButtonFormField<String>(
                             decoration: const InputDecoration(
                               contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10),
+                              EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                               border: InputBorder.none,
                               filled: true,
                               fillColor: Colors.white,
-                              hintText: 'Filter II',
+                              suffixIcon: Padding(
+                                padding: EdgeInsets.only(right: 28),
+                                child: const Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blueAccent,size: 16,),
+                              ),
                             ),
+                            icon: Container(),
                             value: dropdownValue2,
                             onChanged: (String? newValue) {
                               setState(() {
@@ -1080,7 +1088,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                 .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
-                                child: Text(value),
+                                child: Text(value,style: TextStyle(fontSize: 15,color: Colors.blueGrey),),
                               );
                             }).toList(),
                           ),
@@ -1121,25 +1129,25 @@ class _DashboardPageState extends State<DashboardPage> {
                 DataColumn(label: Container(
                     child: Padding(
                       padding: EdgeInsets.only(left: 30),
-                      child: Text('Status',style:TextStyle( color: Colors.indigo[900],   fontSize: 15,
+                      child: Text('Status',style:TextStyle( color: Colors.indigo[900],   fontSize: 17,
                         fontWeight: FontWeight.bold,),),
                     ))),
                 DataColumn(label: Container(child: Padding(
                   padding: const EdgeInsets.only(left: 5),
-                  child: Text('Order ID',style:TextStyle(                            color: Colors.indigo[900], fontSize: 15,
+                  child: Text('Order ID',style:TextStyle(                            color: Colors.indigo[900], fontSize: 17,
                       fontWeight: FontWeight.bold),),
                 ))),
-                DataColumn(label: Container(child: Text('Created Date',style:TextStyle(                            color: Colors.indigo[900], fontSize: 15,
+                DataColumn(label: Container(child: Text('Created Date',style:TextStyle(                            color: Colors.indigo[900], fontSize: 17,
                     fontWeight: FontWeight.bold),))),
-                DataColumn(label: Container(child: Text('Reference Number',style:TextStyle(                            color: Colors.indigo[900], fontSize: 15,
+                DataColumn(label: Container(child: Text('Reference Number',style:TextStyle(                            color: Colors.indigo[900], fontSize: 17,
                     fontWeight: FontWeight.bold),))),
-                DataColumn(label: Container(child: Text('Total Amount',style:TextStyle(                            color: Colors.indigo[900], fontSize: 15,
+                DataColumn(label: Container(child: Text('Total Amount',style:TextStyle(                            color: Colors.indigo[900], fontSize: 17,
                     fontWeight: FontWeight.bold),))),
                 DataColumn(label: Container(child: Padding(
                   padding: const EdgeInsets.only(left: 2),
                   child: Text('Delivery Status',style:  TextStyle(
                       color: Colors.indigo[900],
-                      fontSize: 15,
+                      fontSize: 17,
                       fontWeight: FontWeight.bold),),
                 ))),
               ],
@@ -1152,24 +1160,36 @@ class _DashboardPageState extends State<DashboardPage> {
                             (states) => isSelected ? Colors.grey[200]! : Colors.white),
                     cells: [
                       DataCell(
-                          Container(
-                              child: Text(dashboard.status, style: TextStyle(fontSize: 15,color:isSelected ? Colors.deepOrange[200] : const Color(0xFFFFB315) ,),))),
-                      DataCell(Container( child: Text(dashboard.orderId))),
+                        Container(
+                          child: Text(
+                            dashboard.status,
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: dashboard.status == 'Completed'
+                                  ? Colors.green
+                                  : isSelected
+                                  ? Colors.deepOrange[200]
+                                  : const Color(0xFFFFB315),
+                            ),
+                          ),
+                        ),
+                      ),
+                      DataCell(Container( child: Text(dashboard.orderId,style: TextStyle(color: Color(0xFFA6A6A6),fontSize: 15,fontStyle: FontStyle.normal),))),
                       DataCell(Container( child: Padding(
                         padding: const EdgeInsets.only(left: 10),
-                        child: Text(dashboard.createdDate),
+                        child: Text(dashboard.createdDate,style:TextStyle(color: Color(0xFFA6A6A6),fontSize: 15,fontStyle: FontStyle.normal),),
                       ))),
                       DataCell(Container(child: Padding(
                         padding: const EdgeInsets.only(left: 50),
-                        child: Text(dashboard.referenceNumber.toString()),
+                        child: Text(dashboard.referenceNumber.toString(),style: TextStyle(color: Color(0xFFA6A6A6),fontSize: 15,fontStyle: FontStyle.normal),),
                       ))),
                       DataCell(Container(child: Padding(
                         padding: const EdgeInsets.only(left: 20),
-                        child: Text(dashboard.totalAmount.toString()),
+                        child: Text(dashboard.totalAmount.toString(),style: TextStyle(color: Color(0xFFA6A6A6),fontSize: 15,fontStyle: FontStyle.normal),),
                       ))),
                       DataCell(Container(child: Padding(
                         padding: const EdgeInsets.only(left: 20),
-                        child: Text(dashboard.deliveryStatus.toString()),
+                        child: Text(dashboard.deliveryStatus.toString(),style: TextStyle(color: Color(0xFFA6A6A6),fontSize: 15,fontStyle: FontStyle.normal),),
                       ))),
                     ]);
               }).toList(),

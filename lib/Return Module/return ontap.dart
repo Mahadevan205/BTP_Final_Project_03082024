@@ -213,26 +213,26 @@ class _ReturnViewState extends State<ReturnView> {
                           onPressed: () {
                             // context
                             //     .go('${PageName.main}/${PageName.subpage1Main}');
-                            context.go('/Dashboard');
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation,
-                                    secondaryAnimation) =>
-                                const DashboardPage(
-                                ),
-                                transitionDuration:
-                                const Duration(milliseconds: 200),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  return FadeTransition(
-                                    opacity: animation,
-                                    child: child,
-                                  );
-                                },
-                              ),
-                            );
+                            context.go('/return-view/Home');
+                            // Navigator.push(
+                            //   context,
+                            //   PageRouteBuilder(
+                            //     pageBuilder:
+                            //         (context, animation,
+                            //         secondaryAnimation) =>
+                            //     const DashboardPage(
+                            //     ),
+                            //     transitionDuration:
+                            //     const Duration(milliseconds: 200),
+                            //     transitionsBuilder: (context, animation,
+                            //         secondaryAnimation, child) {
+                            //       return FadeTransition(
+                            //         opacity: animation,
+                            //         child: child,
+                            //       );
+                            //     },
+                            //   ),
+                            // );
                           },
                           icon: Icon(
                               Icons.dashboard, color: Colors.indigo[900]),
@@ -244,27 +244,27 @@ class _ReturnViewState extends State<ReturnView> {
                         const SizedBox(height: 20),
                         TextButton.icon(
                           onPressed: () {
-                            context.go('/Product_List');
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation,
-                                    secondaryAnimation) =>
-                                const ProductPage(
-                                  product: null,
-                                ),
-                                transitionDuration:
-                                const Duration(milliseconds: 200),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  return FadeTransition(
-                                    opacity: animation,
-                                    child: child,
-                                  );
-                                },
-                              ),
-                            );
+                            context.go('/return-view/Products');
+                            // Navigator.push(
+                            //   context,
+                            //   PageRouteBuilder(
+                            //     pageBuilder:
+                            //         (context, animation,
+                            //         secondaryAnimation) =>
+                            //     const ProductPage(
+                            //       product: null,
+                            //     ),
+                            //     transitionDuration:
+                            //     const Duration(milliseconds: 200),
+                            //     transitionsBuilder: (context, animation,
+                            //         secondaryAnimation, child) {
+                            //       return FadeTransition(
+                            //         opacity: animation,
+                            //         child: child,
+                            //       );
+                            //     },
+                            //   ),
+                            // );
                           },
                           icon: Icon(Icons.image_outlined,
                               color: Colors.indigo[900]),
@@ -277,25 +277,25 @@ class _ReturnViewState extends State<ReturnView> {
                         TextButton.icon(
                           onPressed: () {
                             // context.go('${PageName.main}/${PageName.subpage1Main}');
-
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder:
-                                    (context, animation,
-                                    secondaryAnimation) =>
-                                const Orderspage(),
-                                transitionDuration:
-                                const Duration(milliseconds: 200),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  return FadeTransition(
-                                    opacity: animation,
-                                    child: child,
-                                  );
-                                },
-                              ),
-                            );
+                              context.go('/return-view/Orders');
+                            // Navigator.push(
+                            //   context,
+                            //   PageRouteBuilder(
+                            //     pageBuilder:
+                            //         (context, animation,
+                            //         secondaryAnimation) =>
+                            //     const Orderspage(),
+                            //     transitionDuration:
+                            //     const Duration(milliseconds: 200),
+                            //     transitionsBuilder: (context, animation,
+                            //         secondaryAnimation, child) {
+                            //       return FadeTransition(
+                            //         opacity: animation,
+                            //         child: child,
+                            //       );
+                            //     },
+                            //   ),
+                            // );
                           },
                           icon: Icon(Icons.warehouse,
                               color: Colors.blue[900]),

@@ -513,25 +513,25 @@ class _CreateReturnState extends State<CreateReturn> {
                                   icon:
                                   const Icon(Icons.arrow_back), // Back button icon
                                   onPressed: () {
-                                    context.go('/dashboard/return/:return');
-                                    Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation,
-                                            secondaryAnimation) =>
-                                        const Returnpage(
-                                        ),
-                                        transitionDuration:
-                                        const Duration(milliseconds: 200),
-                                        transitionsBuilder: (context, animation,
-                                            secondaryAnimation, child) {
-                                          return FadeTransition(
-                                            opacity: animation,
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                    );
+                                    context.go('/Create_return/Return_List');
+                                    // Navigator.push(
+                                    //   context,
+                                    //   PageRouteBuilder(
+                                    //     pageBuilder: (context, animation,
+                                    //         secondaryAnimation) =>
+                                    //     const Returnpage(
+                                    //     ),
+                                    //     transitionDuration:
+                                    //     const Duration(milliseconds: 200),
+                                    //     transitionsBuilder: (context, animation,
+                                    //         secondaryAnimation, child) {
+                                    //       return FadeTransition(
+                                    //         opacity: animation,
+                                    //         child: child,
+                                    //       );
+                                    //     },
+                                    //   ),
+                                    // );
                                   },
                                 ),
                                 const Padding(
@@ -1276,33 +1276,33 @@ class _CreateReturnState extends State<CreateReturn> {
                                               };
                                               print('return design module file');
                                               print(orderDetailsMap);
-                                              context.go('/Add_Image',extra: {
+                                              context.go('/Create_Return/Add_Image',extra: {
                                                 'orderDetails': _orderDetails,
                                                 'storeImages': widget.storeImages,
                                                 'imageSizeStrings':widget.imageSizeStrings,
                                                 'orderDetailsMap': orderDetailsMap,
                                               });
-                                              Navigator.push(
-                                                context,
-                                                PageRouteBuilder(
-                                                  pageBuilder: (context, animation,
-                                                      secondaryAnimation) =>
-                                                   ReturnImage(
-                                                    orderDetails: _orderDetails,
-                                                    storeImages: widget.storeImages,
-                                                    imageSizeStrings: widget.imageSizeStrings,
-                                                    orderDetailsMap: orderDetailsMap,),
-                                                  transitionDuration:
-                                                  const Duration(milliseconds: 200),
-                                                  transitionsBuilder: (context, animation,
-                                                      secondaryAnimation, child) {
-                                                    return FadeTransition(
-                                                      opacity: animation,
-                                                      child: child,
-                                                    );
-                                                  },
-                                                ),
-                                              );
+                                              // Navigator.push(
+                                              //   context,
+                                              //   PageRouteBuilder(
+                                              //     pageBuilder: (context, animation,
+                                              //         secondaryAnimation) =>
+                                              //      ReturnImage(
+                                              //       orderDetails: _orderDetails,
+                                              //       storeImages: widget.storeImages,
+                                              //       imageSizeStrings: widget.imageSizeStrings,
+                                              //       orderDetailsMap: orderDetailsMap,),
+                                              //     transitionDuration:
+                                              //     const Duration(milliseconds: 200),
+                                              //     transitionsBuilder: (context, animation,
+                                              //         secondaryAnimation, child) {
+                                              //       return FadeTransition(
+                                              //         opacity: animation,
+                                              //         child: child,
+                                              //       );
+                                              //     },
+                                              //   ),
+                                              // );
 
                                               // Navigator.push(
                                               //   context,

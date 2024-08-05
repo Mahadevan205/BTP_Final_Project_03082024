@@ -528,31 +528,32 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
       print('from the api response');
       print(orderId);
 
-      // context.go('/Order_List/Documents',extra: {
-      //   'selectedProducts': updatedOrder,
-      //   'orderId': orderId,
-      //   'orderDetails':  filteredData.map((detail) => OrderDetail(
-      //     orderId: detail.orderId,
-      //     orderDate: detail.orderDate,
-      //     items: [],
-      //     // Add other fields as needed
-      //   )).toList(),
-      //
-      // });
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => SeventhPage(
-          selectedProducts: updatedOrder,
-          orderId: orderId,
-          orderDetails:  filteredData.map((detail) => OrderDetail(
-            orderId: detail.orderId,
-            orderDate: detail.orderDate,
-            items: [],
-            // Add other fields as needed
-          )).toList(),
-          product: null,
-        )), // Replace with your next page
-      );
+      context.go('/Order_List/Documents',extra: {
+        'selectedProducts': updatedOrder,
+        'orderId': orderId,
+        'orderDetails':  filteredData.map((detail) => OrderDetail(
+          orderId: detail.orderId,
+          orderDate: detail.orderDate,
+          items: [],
+          // Add other fields as needed
+        )).toList(),
+
+      });
+      //original code
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => SeventhPage(
+      //     selectedProducts: updatedOrder,
+      //     orderId: orderId,
+      //     orderDetails:  filteredData.map((detail) => OrderDetail(
+      //       orderId: detail.orderId,
+      //       orderDate: detail.orderDate,
+      //       items: [],
+      //       // Add other fields as needed
+      //     )).toList(),
+      //     product: null,
+      //   )), // Replace with your next page
+      // );
 
       // ScaffoldMessenger.of(context).showSnackBar(
       //   SnackBar(content: Text(responseData['message'])),
@@ -948,26 +949,26 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                               onPressed: () {
                                 // context
                                 //     .go('${PageName.main}/${PageName.subpage1Main}');
-                                context.go('/Orderspage/placingorder/dasbaord');
-                                Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation, secondaryAnimation) =>
-                                    const DashboardPage(
-
-                                    ),
-                                    transitionDuration:
-                                    const Duration(milliseconds: 200),
-                                    transitionsBuilder: (context, animation,
-                                        secondaryAnimation, child) {
-                                      return FadeTransition(
-                                        opacity: animation,
-                                        child: child,
-                                      );
-                                    },
-                                  ),
-                                );
+                                context.go('/Edit_Order/Home');
+                                // Navigator.push(
+                                //   context,
+                                //   PageRouteBuilder(
+                                //     pageBuilder:
+                                //         (context, animation, secondaryAnimation) =>
+                                //     const DashboardPage(
+                                //
+                                //     ),
+                                //     transitionDuration:
+                                //     const Duration(milliseconds: 200),
+                                //     transitionsBuilder: (context, animation,
+                                //         secondaryAnimation, child) {
+                                //       return FadeTransition(
+                                //         opacity: animation,
+                                //         child: child,
+                                //       );
+                                //     },
+                                //   ),
+                                // );
                               },
                               icon: Icon(Icons.dashboard, color: Colors.indigo[900]),
                               label: Text(
@@ -979,26 +980,26 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                             TextButton.icon(
                               onPressed: () {
                                 context.go(
-                                    '/Orderspage/placingorder/productpage:product');
-                                Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation, secondaryAnimation) =>
-                                    const ProductPage(
-                                      product: null,
-                                    ),
-                                    transitionDuration:
-                                    const Duration(milliseconds: 200),
-                                    transitionsBuilder: (context, animation,
-                                        secondaryAnimation, child) {
-                                      return FadeTransition(
-                                        opacity: animation,
-                                        child: child,
-                                      );
-                                    },
-                                  ),
-                                );
+                                    '/Edit_Order/Products');
+                                // Navigator.push(
+                                //   context,
+                                //   PageRouteBuilder(
+                                //     pageBuilder:
+                                //         (context, animation, secondaryAnimation) =>
+                                //     const ProductPage(
+                                //       product: null,
+                                //     ),
+                                //     transitionDuration:
+                                //     const Duration(milliseconds: 200),
+                                //     transitionsBuilder: (context, animation,
+                                //         secondaryAnimation, child) {
+                                //       return FadeTransition(
+                                //         opacity: animation,
+                                //         child: child,
+                                //       );
+                                //     },
+                                //   ),
+                                // );
                               },
                               icon: Icon(Icons.image_outlined,
                                   color: Colors.indigo[900]),
@@ -1059,24 +1060,24 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                             const SizedBox(height: 20),
                             TextButton.icon(
                               onPressed: () {
-                                context.go('/dashboard/return/:return');
-                                Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder:
-                                        (context, animation, secondaryAnimation) =>
-                                    const Returnpage(),
-                                    transitionDuration:
-                                    const Duration(milliseconds: 200),
-                                    transitionsBuilder: (context, animation,
-                                        secondaryAnimation, child) {
-                                      return FadeTransition(
-                                        opacity: animation,
-                                        child: child,
-                                      );
-                                    },
-                                  ),
-                                );
+                                context.go('/Edit_Order/Return');
+                                // Navigator.push(
+                                //   context,
+                                //   PageRouteBuilder(
+                                //     pageBuilder:
+                                //         (context, animation, secondaryAnimation) =>
+                                //     const Returnpage(),
+                                //     transitionDuration:
+                                //     const Duration(milliseconds: 200),
+                                //     transitionsBuilder: (context, animation,
+                                //         secondaryAnimation, child) {
+                                //       return FadeTransition(
+                                //         opacity: animation,
+                                //         child: child,
+                                //       );
+                                //     },
+                                //   ),
+                                // );
                               },
                               icon: Icon(Icons.backspace_sharp,
                                   color: Colors.blue[900]),
@@ -1116,24 +1117,24 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                                     icon:
                                     const Icon(Icons.arrow_back), // Back button icon
                                     onPressed: () {
-                                      context.go('/Documents/Orderspage');
-                                      Navigator.push(
-                                        context,
-                                        PageRouteBuilder(
-                                          pageBuilder:
-                                              (context, animation, secondaryAnimation) =>
-                                          const Orderspage(),
-                                          transitionDuration:
-                                          const Duration(milliseconds: 200),
-                                          transitionsBuilder: (context, animation,
-                                              secondaryAnimation, child) {
-                                            return FadeTransition(
-                                              opacity: animation,
-                                              child: child,
-                                            );
-                                          },
-                                        ),
-                                      );
+                                      context.go('/Edit_Order/Order_List');
+                                      // Navigator.push(
+                                      //   context,
+                                      //   PageRouteBuilder(
+                                      //     pageBuilder:
+                                      //         (context, animation, secondaryAnimation) =>
+                                      //     const Orderspage(),
+                                      //     transitionDuration:
+                                      //     const Duration(milliseconds: 200),
+                                      //     transitionsBuilder: (context, animation,
+                                      //         secondaryAnimation, child) {
+                                      //       return FadeTransition(
+                                      //         opacity: animation,
+                                      //         child: child,
+                                      //       );
+                                      //     },
+                                      //   ),
+                                      // );
                                     },
                                   ),
                                   const Padding(
@@ -1607,21 +1608,31 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
 
                                             print('updated productlist');
                                             print(productList);
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => NextPage(
-                                                  product: Product(prodId: '',price: 0,productName: '',proId: '',category: '',selectedVariation: '',selectedUOM: '',subCategory: '',totalamount: 0,total: 0,tax: '',quantity: 0,discount: '',imageId: '',unit: '', totalAmount: 0.0,qty: 0), // You need to pass a Product object here
-                                                  products: const [], // You need to pass a list of Product objects here
-                                                  data: widget.data,
-                                                  selectedProducts: productList,
-                                                  inputText: 'hello',
 
-                                                  // You need to pass a string here
-                                                  subText: 'some_text', notselect: '',
-                                                ),
-                                              ),
-                                            );
+                                            context.go('/Add_products',extra: {
+                                              'product': Product(prodId: '',price: 0,productName: '',proId: '',category: '',selectedVariation: '',selectedUOM: '',subCategory: '',totalamount: 0,total: 0,tax: '',quantity: 0,discount: '',imageId: '',unit: '', totalAmount: 0.0,qty: 0), // You need to pass a Product object here
+                                              'products': const [], // You need to pass a list of Product objects here
+                                              'data': widget.data,
+                                              'selectedProducts': productList,
+                                              'inputText': 'hello',
+                                              'subText': 'some_text',
+                                              'notselect': '',
+                                            });
+
+                                            // Navigator.push(
+                                            //   context,
+                                            //   MaterialPageRoute(
+                                            //     builder: (context) => NextPage(
+                                            //       product: Product(prodId: '',price: 0,productName: '',proId: '',category: '',selectedVariation: '',selectedUOM: '',subCategory: '',totalamount: 0,total: 0,tax: '',quantity: 0,discount: '',imageId: '',unit: '', totalAmount: 0.0,qty: 0), // You need to pass a Product object here
+                                            //       products: const [], // You need to pass a list of Product objects here
+                                            //       data: widget.data,
+                                            //       selectedProducts: productList,
+                                            //       inputText: 'hello',
+                                            //       // You need to pass a string here
+                                            //       subText: 'some_text', notselect: '',
+                                            //     ),
+                                            //   ),
+                                            // );
                                           },
                                           // icon: Icon(Icons.add,color: Colors.white,),
                                           child: const Text('+Add Products',style: TextStyle(color: Colors.white),),

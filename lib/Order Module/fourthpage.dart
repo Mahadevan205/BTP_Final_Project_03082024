@@ -428,6 +428,11 @@ class _NextPageState extends State<NextPage> {
                                             //   'data': data2,
                                             // });
 
+                                            context.go('/Edit/Add_Product',extra: {
+                                              'selectedProducts': products,
+                                              'data': data2,
+                                            });
+
                                             print(orders);
                                             Navigator.push(
                                               context,
@@ -436,7 +441,8 @@ class _NextPageState extends State<NextPage> {
                                                     secondaryAnimation) =>
                                                     SelectedProductPage(
                                                       selectedProducts: products,
-                                                      data: data2,),
+                                                      data: data2,
+                                                    ),
                                                 transitionDuration:
                                                 const Duration(milliseconds: 200),
                                                 transitionsBuilder: (context, animation,

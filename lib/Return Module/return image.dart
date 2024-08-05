@@ -293,26 +293,26 @@ class _ReturnImageState extends State<ReturnImage> {
                         onPressed: () {
                           // context
                           //     .go('${PageName.main}/${PageName.subpage1Main}');
-                          context.go('/Dashboard');
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation,
-                                  secondaryAnimation) =>
-                              const DashboardPage(
-                              ),
-                              transitionDuration:
-                              const Duration(milliseconds: 200),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+                          context.go('/Add_Image/Create_Return/Home');
+                          // Navigator.push(
+                          //   context,
+                          //   PageRouteBuilder(
+                          //     pageBuilder:
+                          //         (context, animation,
+                          //         secondaryAnimation) =>
+                          //     const DashboardPage(
+                          //     ),
+                          //     transitionDuration:
+                          //     const Duration(milliseconds: 200),
+                          //     transitionsBuilder: (context, animation,
+                          //         secondaryAnimation, child) {
+                          //       return FadeTransition(
+                          //         opacity: animation,
+                          //         child: child,
+                          //       );
+                          //     },
+                          //   ),
+                          // );
                           // context.go('${PageName.dashboardRoute}');
                           // Navigator.push(
                           //   context,
@@ -333,27 +333,27 @@ class _ReturnImageState extends State<ReturnImage> {
                       const SizedBox(height: 20),
                       TextButton.icon(
                         onPressed: () {
-                          context.go('/Product_List');
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation,
-                                  secondaryAnimation) =>
-                              const ProductPage(
-                                product: null,
-                              ),
-                              transitionDuration:
-                              const Duration(milliseconds: 200),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+                          context.go('/Add_Image/Create_Return/Products');
+                          // Navigator.push(
+                          //   context,
+                          //   PageRouteBuilder(
+                          //     pageBuilder:
+                          //         (context, animation,
+                          //         secondaryAnimation) =>
+                          //     const ProductPage(
+                          //       product: null,
+                          //     ),
+                          //     transitionDuration:
+                          //     const Duration(milliseconds: 200),
+                          //     transitionsBuilder: (context, animation,
+                          //         secondaryAnimation, child) {
+                          //       return FadeTransition(
+                          //         opacity: animation,
+                          //         child: child,
+                          //       );
+                          //     },
+                          //   ),
+                          // );
                         },
                         icon: Icon(Icons.image_outlined,
                             color: Colors.indigo[900]),
@@ -365,24 +365,25 @@ class _ReturnImageState extends State<ReturnImage> {
                       const SizedBox(height: 20),
                       TextButton.icon(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation,
-                                  secondaryAnimation) =>
-                              const Orderspage(),
-                              transitionDuration:
-                              const Duration(milliseconds: 200),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+                          context.go('/Add_Image/Create_Return/Orders');
+                          // Navigator.push(
+                          //   context,
+                          //   PageRouteBuilder(
+                          //     pageBuilder:
+                          //         (context, animation,
+                          //         secondaryAnimation) =>
+                          //     const Orderspage(),
+                          //     transitionDuration:
+                          //     const Duration(milliseconds: 200),
+                          //     transitionsBuilder: (context, animation,
+                          //         secondaryAnimation, child) {
+                          //       return FadeTransition(
+                          //         opacity: animation,
+                          //         child: child,
+                          //       );
+                          //     },
+                          //   ),
+                          // );
                         },
                         icon: Icon(Icons.warehouse,
                             color: Colors.blue[900]),
@@ -470,24 +471,24 @@ class _ReturnImageState extends State<ReturnImage> {
                           icon:
                           const Icon(Icons.arrow_back), // Back button icon
                           onPressed: () {
-                            context.go('/Order_Return');
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, animation,
-                                    secondaryAnimation) =>
-                                    CreateReturn(orderDetailsMap: const {}, storeImage: '', imageSizeStrings: const [], storeImages: const [], orderDetails: const [],imageSizeString: '',),
-                                transitionDuration:
-                                const Duration(milliseconds: 200),
-                                transitionsBuilder: (context, animation,
-                                    secondaryAnimation, child) {
-                                  return FadeTransition(
-                                    opacity: animation,
-                                    child: child,
-                                  );
-                                },
-                              ),
-                            );
+                            context.go('/Add_Image/Create_return');
+                            // Navigator.push(
+                            //   context,
+                            //   PageRouteBuilder(
+                            //     pageBuilder: (context, animation,
+                            //         secondaryAnimation) =>
+                            //         CreateReturn(orderDetailsMap: const {}, storeImage: '', imageSizeStrings: const [], storeImages: const [], orderDetails: const [],imageSizeString: '',),
+                            //     transitionDuration:
+                            //     const Duration(milliseconds: 200),
+                            //     transitionsBuilder: (context, animation,
+                            //         secondaryAnimation, child) {
+                            //       return FadeTransition(
+                            //         opacity: animation,
+                            //         child: child,
+                            //       );
+                            //     },
+                            //   ),
+                            // );
 
                           },
                         ),

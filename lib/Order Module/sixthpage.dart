@@ -937,12 +937,12 @@ class _SixthPageState extends State<SixthPage> {
                                 const Icon(Icons.arrow_back), // Back button icon
                                 onPressed: () {
                                   context.go('/Order_List');
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                        const Orderspage()),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //       builder: (context) =>
+                                  //       const Orderspage()),
+                                  // );
                                 },
                               ),
                               const Padding(
@@ -1042,12 +1042,12 @@ class _SixthPageState extends State<SixthPage> {
                                 child: OutlinedButton(
                                   onPressed: () {
                                     context.go('/Download');
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                          const EighthPage()),
-                                    );
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //       builder: (context) =>
+                                    //       const EighthPage()),
+                                    // );
                                   },
                                   style: OutlinedButton.styleFrom(
                                     backgroundColor:

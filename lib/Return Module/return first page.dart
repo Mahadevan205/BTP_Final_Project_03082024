@@ -803,13 +803,13 @@ class _ReturnpageState extends State<Returnpage> {
 
                               onTap:() {
                                 context.go('/return-view', extra: returnMaster);
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ReturnView(returnMaster: returnMaster,)
-                                  )
-                                  , // pass the selected product here
-                                );
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //       builder: (context) => ReturnView(returnMaster: returnMaster,)
+                                //   )
+                                //   , // pass the selected product here
+                                // );
 
                               },
                               child: Container(
