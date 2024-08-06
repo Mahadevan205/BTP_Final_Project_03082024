@@ -53,6 +53,9 @@ dependencies:
   pdf: ^3.11.0
   flutter_downloader: ^1.11.8
   printing: ^5.12.0
+  syncfusion_flutter_xlsio: ^26.2.7
+  open_file: ^3.3.2
+  excel: ^4.0.2
 
 
 dev_dependencies:
@@ -85,6 +88,7 @@ flutter:
      - images/Final-Ikyam-Logo.png
      - images/open.png
      - images/nk1.png
+     - images/template.pdf
 
 
 
