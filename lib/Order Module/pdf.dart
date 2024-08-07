@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
   }
 
   Future<List<dynamic>> _fetchAllProductMaster() async {
-    final String token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaGFuYXNla2FyIiwiUm9sZXMiOlt7ImF1dGhvcml0eSI6ImRldmVsb3BlciJ9XSwiZXhwIjoxNzIyOTUyOTI0LCJpYXQiOjE3MjI5NDU3MjR9.3-TXltmekKZO5FmGluZx1_39OmNH_Ktqp-RSXieOuFKVyGvvPC55x-QbIqc1FZyVs7qz9S01T7CTAHtWLNCYAg';
+    final String token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaGFuYXNla2FyIiwiUm9sZXMiOlt7ImF1dGhvcml0eSI6ImRldmVsb3BlciJ9XSwiZXhwIjoxNzIzMDA4MzkzLCJpYXQiOjE3MjMwMDExOTN9.xbTgm_R3mT-Zo-8AnJ5m0I3ZUN8kRMwBA2jZ7iS4hnZNS1MIozI0zuWvhQQsatSDhRt-pEthHKhDQNDhVBCaKg';
     try {
       final response = await http.get(
         Uri.parse('https://mjl9lz64l7.execute-api.ap-south-1.amazonaws.com/stage1/api/productmaster/get_all_productmaster'),
@@ -70,60 +70,33 @@ class MyApp extends StatelessWidget {
     }
   }
 
+
   Future downloadPdf() async {
     final String orderId = 'ORD_02282';
     try {
-      final  productMasterData = await _fetchAllProductMaster();
+      final productMasterData = await _fetchAllProductMaster();
       final orderDetails = await _fetchOrderDetails(orderId);
       for (var product in productMasterData) {
-        print('Product: ${product['productName']}, Discount: ${product['discount']}');
-        for(var item in orderDetails!.items){
-          if(product['productName'] == item['productName']){
-            print('true');
-            print(product['discount']);
-            print(product['tax']);
-            item['tax'] =product['tax'];
-            item['discount'] =  product['discount'];
-            print(item['tax']);
-
-           print(item['discount']);
+        for (var item in orderDetails!.items) {
+          if (product['productName'] == item['productName']) {
+            item['tax'] = product['tax'];
+            item['discount'] = product['discount'];
+            item['discountamount'] = (double.parse(item['totalAmount'].toString()) * double.parse(item['discount'].replaceAll('%', ''))) / 100;
+            item['taxamount'] = ((double.parse(item['totalAmount'].toString()) -
+                double.parse(item['discountamount'].toString())) *
+                double.parse(item['tax'].replaceAll('%', '').toString())) / 100;
           }
         }
       }
-      //List <Product>ProductList =productMasterData;
-      // print('hellooo');
-      // print(ProductList);
-      // print('check');
-      // print(ProductList['discount' as int]);
-
-
 
       if (orderDetails != null) {
-        for (var item in orderDetails.items) {
-         // final discountElement = productMasterData.firstWhere((element) =>
-          // element.productName == item.productName &&
-          //     element['category'] == item.category &&
-          //     element['subCategory'] == item.subCategory &&
-          //     element['price'] == item.price,
-          //     orElse: () => null);
-         // print('discount');
-         // print(discountElement);
-          final Uint8List pdfBytes = await Returnpdf(orderDetails);
-          final blob = html.Blob([pdfBytes]);
-          final url = html.Url.createObjectUrlFromBlob(blob);
-          final anchor = html.AnchorElement(href: url)
-            ..setAttribute('download', 'invoice.pdf')
-            ..click();
-          html.Url.revokeObjectUrl(url);
-          // if (discountElement != null) {
-          //   print('Discount Element:');
-          // //  print(discountElement);
-          // //  final discount = discountElement['discount'];
-          //
-          // } else {
-          //   print('No matching product found in product master data.');
-          // }
-        }
+        final Uint8List pdfBytes = await Returnpdf(orderDetails);
+        final blob = html.Blob([pdfBytes]);
+        final url = html.Url.createObjectUrlFromBlob(blob);
+        final anchor = html.AnchorElement(href: url)
+          ..setAttribute('download', 'invoice.pdf')
+          ..click();
+        html.Url.revokeObjectUrl(url);
       } else {
         print('Failed to fetch order details.');
       }
@@ -131,6 +104,74 @@ class MyApp extends StatelessWidget {
       print('Error generating PDF: $e');
     }
   }
+
+  // Future downloadPdf() async {
+  //   final String orderId = 'ORD_02282';
+  //   try {
+  //     final  productMasterData = await _fetchAllProductMaster();
+  //     final orderDetails = await _fetchOrderDetails(orderId);
+  //     for (var product in productMasterData) {
+  //       print('Product: ${product['productName']}, Discount: ${product['discount']}');
+  //       for(var item in orderDetails!.items){
+  //         if(product['productName'] == item['productName']){
+  //           print('true');
+  //           print(product['discount']);
+  //           print(product['tax']);
+  //           item['tax'] =product['tax'];
+  //           item['discount'] =  product['discount'];
+  //           item['discountamount'] = (item['price'] * double.parse(item['discount'].replaceAll('%', ''))) / 100;
+  //           item['taxamount'] = (item['discountamount'] * double.parse(item['tax'].replaceAll('%', ''))) / 100;
+  //         //  item['taxamount'] = (item['price'] - double.parse(item['discountamount'])) / 100;
+  //           //item['taxamount'] = (item['discountamount'] * item['tax'] / 100);
+  //           // item['discountamount'] = (item['discount'] )/ 100;
+  //           print(item['tax']);
+  //
+  //
+  //          print(item['discount']);
+  //         }
+  //       }
+  //     }
+  //     //List <Product>ProductList =productMasterData;
+  //     // print('hellooo');
+  //     // print(ProductList);
+  //     // print('check');
+  //     // print(ProductList['discount' as int]);
+  //
+  //
+  //
+  //     if (orderDetails != null) {
+  //       for (var item in orderDetails.items) {
+  //        // final discountElement = productMasterData.firstWhere((element) =>
+  //         // element.productName == item.productName &&
+  //         //     element['category'] == item.category &&
+  //         //     element['subCategory'] == item.subCategory &&
+  //         //     element['price'] == item.price,
+  //         //     orElse: () => null);
+  //        // print('discount');
+  //        // print(discountElement);
+  //         final Uint8List pdfBytes = await Returnpdf(orderDetails);
+  //         final blob = html.Blob([pdfBytes]);
+  //         final url = html.Url.createObjectUrlFromBlob(blob);
+  //         final anchor = html.AnchorElement(href: url)
+  //           ..setAttribute('download', 'invoice.pdf')
+  //           ..click();
+  //         html.Url.revokeObjectUrl(url);
+  //         // if (discountElement != null) {
+  //         //   print('Discount Element:');
+  //         // //  print(discountElement);
+  //         // //  final discount = discountElement['discount'];
+  //         //
+  //         // } else {
+  //         //   print('No matching product found in product master data.');
+  //         // }
+  //       }
+  //     } else {
+  //       print('Failed to fetch order details.');
+  //     }
+  //   } catch (e) {
+  //     print('Error generating PDF: $e');
+  //   }
+  // }
 }
 
 Future<Uint8List> loadImage() async {
@@ -140,7 +181,7 @@ Future<Uint8List> loadImage() async {
 
 
 Future<OrderDetail?> _fetchOrderDetails(String orderId) async {
-  String token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaGFuYXNla2FyIiwiUm9sZXMiOlt7ImF1dGhvcml0eSI6ImRldmVsb3BlciJ9XSwiZXhwIjoxNzIyOTUyOTI0LCJpYXQiOjE3MjI5NDU3MjR9.3-TXltmekKZO5FmGluZx1_39OmNH_Ktqp-RSXieOuFKVyGvvPC55x-QbIqc1FZyVs7qz9S01T7CTAHtWLNCYAg';
+  String token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkaGFuYXNla2FyIiwiUm9sZXMiOlt7ImF1dGhvcml0eSI6ImRldmVsb3BlciJ9XSwiZXhwIjoxNzIzMDA4MzkzLCJpYXQiOjE3MjMwMDExOTN9.xbTgm_R3mT-Zo-8AnJ5m0I3ZUN8kRMwBA2jZ7iS4hnZNS1MIozI0zuWvhQQsatSDhRt-pEthHKhDQNDhVBCaKg';
   try {
     final url = 'https://mjl9lz64l7.execute-api.ap-south-1.amazonaws.com/stage1/api/order_master/search_by_orderid/$orderId';
     final response = await http.get(
@@ -492,7 +533,7 @@ Future<Uint8List> Returnpdf(OrderDetail orderDetails) async {
           pw.Text('Gross Discount (%):',style: pw.TextStyle(fontSize: 10)),
           //izedBox(width: 50,),
           pw.Text('${item['discount']}',style: pw.TextStyle(fontSize: 10)),
-       //  pw.Text('-${item['totalAmount'] - item['discount'] * 100}',style: pw.TextStyle(fontSize: 10)),
+        pw.Text('-${item['discountamount']}',style: pw.TextStyle(fontSize: 10)),
 
           // Text('Gross Discount (%): -21.00 %'),
           // Text('State sales tax (%): 5.50 %'),
@@ -510,7 +551,7 @@ Future<Uint8List> Returnpdf(OrderDetail orderDetails) async {
           pw. Text('State sales tax (%)',style: pw.TextStyle(fontSize: 10)),
           //izedBox(width: 50,),
           pw.Text('${item['tax']}',style: pw.TextStyle(fontSize: 10)),
-         // pw.Text('${(item['totalAmount'] * item['tax'] )/ 100}',style: pw.TextStyle(fontSize: 10)),
+          pw.Text('${(item['taxamount'])}',style: pw.TextStyle(fontSize: 10)),
 
           // Text('Gross Discount (%): -21.00 %'),
           // Text('State sales tax (%): 5.50 %'),

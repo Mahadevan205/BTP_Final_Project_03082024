@@ -13,12 +13,13 @@ import '../screen/login.dart';
 import '../Order Module/firstpage.dart';
 import 'package:http/http.dart' as http;
 
-// void main() {
-//   runApp(
-//       MaterialApp(
-//         home: CreateReturn(storeImage: '', imageSizeString: '',),)
-//   );
-// }
+void main() {
+  runApp(
+      MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: CreateReturn(storeImage: '', imageSizeString: '', orderDetailsMap: {}, storeImages: [], orderDetails: [], imageSizeStrings: [],),)
+  );
+}
 
 
 
@@ -61,7 +62,10 @@ class _CreateReturnState extends State<CreateReturn> {
   String _enteredValue = '';
   String token = window.sessionStorage["token"] ?? " ";
   double _totalAmount = 0;
+
+
   Future<void> addReturnMaster() async {
+
     final apiUrl = 'https://mjl9lz64l7.execute-api.ap-south-1.amazonaws.com/stage1/api/return_master/add_return_master';
 
     final headers = {
@@ -72,7 +76,7 @@ class _CreateReturnState extends State<CreateReturn> {
     List<Map<String, dynamic>> items = [];
 
     for (var item in _orderDetails) {
-      if(item['enteredQty'] != null ){
+      if (item['enteredQty'] != null) {
         print(item['enteredQty']);
         items.add({
           "category": item['category'],
@@ -87,6 +91,7 @@ class _CreateReturnState extends State<CreateReturn> {
         });
       }
     }
+
     final requestBody = {
       "contactPerson": ContactpersonController.text,
       "email": EmailAddressController.text,
@@ -107,55 +112,53 @@ class _CreateReturnState extends State<CreateReturn> {
     if (response.statusCode == 200) {
       print('Return Master added successfully');
       final responseBody = jsonDecode(response.body);
-          final returnId = responseBody['id'];
+      final returnId = responseBody['id'];
 
       await showDialog(
-            context: context,
-            builder: (BuildContext context) {
-            return AlertDialog(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
+            icon: const Icon(
+              Icons.check_circle_rounded,
+              color: Colors.green,
+              size: 25,
+            ),
+            title: const Padding(
+              padding: EdgeInsets.only(left: 12),
+              child: Text('Return Created Successfully', style: TextStyle(fontSize: 15),),
+            ),
+            content: Padding(
+              padding: const EdgeInsets.only(left: 25),
+              child: Text('Your return ID is: $returnId'),
+            ),
+            actions: <Widget>[
+              ElevatedButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  // Navigator.of(context).pop(); // close the alert dialog
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                      const Returnpage(),
+                      transitionDuration: const Duration(milliseconds: 200),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        return FadeTransition(
+                          opacity: animation,
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
+                },
               ),
-             icon:  const Icon(
-               Icons.check_circle_rounded,
-               color: Colors.green,
-               size: 25,
-             ),
-             title: const Padding(
-               padding: EdgeInsets.only(left: 12),
-               child: Text('Return Created Successfully',style: TextStyle(fontSize:15 ),),
-             ),
-           content: Padding(
-             padding: const EdgeInsets.only(left: 25),
-             child: Text('Your return ID is: $returnId'),
-           ),
-           actions: <Widget>[
-             ElevatedButton(
-               child: const Text('OK'),
-               onPressed: () {
-                // Navigator.of(context).pop(); // close the alert dialog
-                 Navigator.push(
-                   context,
-                   PageRouteBuilder(
-                     pageBuilder: (context, animation, secondaryAnimation) =>
-                     const Returnpage(),
-                     transitionDuration: const Duration(milliseconds: 200),
-                     transitionsBuilder:
-                         (context, animation, secondaryAnimation, child) {
-                       return FadeTransition(
-                         opacity: animation,
-                         child: child,
-                       );
-                     },
-                   ),
-                 );
-               },
-             ),
-           ],
-         );
-       },
-     );
+            ],
+          );
+        },
+      );
     } else {
       print('Error: ${response.statusCode}');
     }
@@ -247,7 +250,7 @@ class _CreateReturnState extends State<CreateReturn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF0F4F8),
       appBar:
       AppBar(
         automaticallyImplyLeading: false,
@@ -283,24 +286,6 @@ class _CreateReturnState extends State<CreateReturn> {
                   onSelected: (value) {
                     if (value == 'logout') {
                       context.go('/');
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                          const LoginScr(
-                          ),
-                          transitionDuration:
-                          const Duration(milliseconds: 200),
-                          transitionsBuilder: (context, animation,
-                              secondaryAnimation, child) {
-                            return FadeTransition(
-                              opacity: animation,
-                              child: child,
-                            );
-                          },
-                        ),
-                      );
                     }
                   },
                   itemBuilder: (BuildContext context) {
@@ -494,8 +479,18 @@ class _CreateReturnState extends State<CreateReturn> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 200,top: 0),
+                  child: Container(
+                    width: 1, // Set the width to 1 for a vertical line
+                    height: 900, // Set the height to your liking
+                    decoration: BoxDecoration(
+                      border: Border(left: BorderSide(width: 1, color: Colors.grey)),
+                    ),
+                  ),
+                ),
                 Positioned(
-                    left: 200,
+                    left: 202,
                     right: 0,
                     top: 0,
                     bottom: 0,
@@ -506,7 +501,7 @@ class _CreateReturnState extends State<CreateReturn> {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             color: Colors.white,
-                            height: 40,
+                            height: 60,
                             child: Row(
                               children: [
                                 IconButton(
@@ -550,10 +545,59 @@ class _CreateReturnState extends State<CreateReturn> {
                                   alignment: Alignment.topRight,
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 10, right: 90),
+                                        top: 15, right: 90),
                                     child: OutlinedButton(
                                       onPressed: () async {
-                                        await addReturnMaster();
+                                        if (_controller.text.isEmpty &&
+                                            ContactpersonController.text.isEmpty &&
+                                            EmailAddressController.text.isEmpty &&
+                                            totalController.text.isEmpty) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text('Please fill all required fields'),
+                                            //  backgroundColor: Colors.red,
+                                            ),
+                                          );}
+                                          else if(_controller.text.isEmpty){
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text('Please fill Invoice Number'),
+                                                //  backgroundColor: Colors.red,
+                                              ),
+                                            );
+                                          }
+                                        else if (_reasonController.text.isEmpty){
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackBar(
+                                              content: Text('Please Enter Return Reason'),
+                                              //  backgroundColor: Colors.red,
+                                            ),
+                                          );
+                                        } else if (ContactpersonController.text.isEmpty){
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text('Please fill Contact Person Name'),
+                                                //  backgroundColor: Colors.red,
+                                              ),
+                                            );
+                                          } else if (EmailAddressController.text.isEmpty){
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text('Please fill Email Address'),
+                                                //  backgroundColor: Colors.red,
+                                              ),
+                                            );
+                                          }else if (totalController.text.isEmpty){
+                                            ScaffoldMessenger.of(context).showSnackBar(
+                                              SnackBar(
+                                                content: Text('Please Enter Return Qty'),
+                                                //  backgroundColor: Colors.red,
+                                              ),
+                                            );
+                                          }
+                                         else {
+                                          await addReturnMaster();
+                                        }
                                       },
                                       style: OutlinedButton.styleFrom(
                                         backgroundColor:
@@ -580,16 +624,12 @@ class _CreateReturnState extends State<CreateReturn> {
                               ],
                             ),
                           ),
-
-                          Padding(
-                            padding: const EdgeInsets.only(top: 0, left: 0),
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 5),
-                              // Space above/below the border
-                              height: 3, // Border height
-                              color: Colors.grey[100], // Border color
-                            ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 1),
+                            // Space above/below the border
+                            height: 0.3, // Border height
+                            color: Colors.black, // Border color
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right:100),
@@ -600,56 +640,49 @@ class _CreateReturnState extends State<CreateReturn> {
                                 // mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:  EdgeInsets.only(right: maxWidth * 0.089,top: 50),
+                                    padding:  EdgeInsets.only(right: maxWidth * 0.089,top: 20),
                                     child: const Text(('Return Date')),
                                   ),
 
 
-                                  DecoratedBox(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: const Color(0xFFEBF3FF), width: 1),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: SizedBox(
-                                      height: 39,
-                                      width: maxWidth *0.13,
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: TextFormField(
-                                              controller: _dateController,
-                                              // Replace with your TextEditingController
-                                              readOnly: true,
-                                              decoration: InputDecoration(
-                                                suffixIcon: Padding(
-                                                  padding: const EdgeInsets.only(right: 20),
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 2, left: 10),
-                                                    child: IconButton(
-                                                      icon: const Padding(
-                                                        padding: EdgeInsets.only(bottom: 16),
-                                                        child: Icon(Icons.calendar_month),
-                                                      ),
-                                                      iconSize: 20,
-                                                      onPressed: () {
-                                                        // _showDatePicker(context);
-                                                      },
+                                  SizedBox(
+                                    height: 39,
+                                    width: maxWidth *0.13,
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: TextFormField(
+                                            controller: _dateController,
+                                            // Replace with your TextEditingController
+                                            readOnly: true,
+                                            decoration: InputDecoration(
+                                              suffixIcon: Padding(
+                                                padding: const EdgeInsets.only(right: 20),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      top: 2, left: 10),
+                                                  child: IconButton(
+                                                    icon: const Padding(
+                                                      padding: EdgeInsets.only(bottom: 16),
+                                                      child: Icon(Icons.calendar_month),
                                                     ),
+                                                    iconSize: 20,
+                                                    onPressed: () {
+                                                      // _showDatePicker(context);
+                                                    },
                                                   ),
                                                 ),
-                                                hintText: '        Select Date',
-                                                fillColor: Colors.grey.shade200,
-                                                contentPadding: const EdgeInsets.symmetric(
-                                                    horizontal: 8, vertical: 8),
-                                                border: InputBorder.none,
-                                                filled: true,
                                               ),
+                                              hintText: 'Select Date',
+                                              fillColor: Colors.white,
+                                              contentPadding: const EdgeInsets.symmetric(
+                                                  horizontal: 8, vertical: 8),
+                                             // border: InputBorder.none,
+                                              filled: true,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   // SizedBox(height: 20.h),
@@ -660,10 +693,10 @@ class _CreateReturnState extends State<CreateReturn> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 50,right: 100,top: 50),
+                            padding: const EdgeInsets.only(left: 50,right: 100,top: 30),
                             child: Container(
                               decoration: BoxDecoration(
-                                border: Border.all(color: const Color(0xFFB2C2D3), width: 2),
+                                border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: const [
                                   BoxShadow(
@@ -686,7 +719,14 @@ class _CreateReturnState extends State<CreateReturn> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Text('Invoice Number'),
+                                              const Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text('Invoice Number'),
+                                                  SizedBox(width: 5,),
+                                                  Text('*', style: TextStyle(color: Colors.red),),
+                                                ],
+                                              ),
                                               const SizedBox(height: 5,),
                                               SizedBox(
                                                 height: 40,
@@ -714,7 +754,14 @@ class _CreateReturnState extends State<CreateReturn> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Text('Reason'),
+                                              const Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text('Reason'),
+                                                  SizedBox(width: 5,),
+                                                  Text('*', style: TextStyle(color: Colors.red),),
+                                                ],
+                                              ),
                                               const SizedBox(height: 5,),
                                               SizedBox(
                                                 height: 40,
@@ -755,7 +802,14 @@ class _CreateReturnState extends State<CreateReturn> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Text('Contact Person'),
+                                              const Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text('Contact Person'),
+                                                  SizedBox(width: 5,),
+                                                  Text('*', style: TextStyle(color: Colors.red),),
+                                                ],
+                                              ),
                                               const SizedBox(height: 5,),
                                               SizedBox(
                                                 height: 40,
@@ -783,7 +837,14 @@ class _CreateReturnState extends State<CreateReturn> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Text('Email'),
+                                              const Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text('Email'),
+                                                  SizedBox(width: 5,),
+                                                  Text('*', style: TextStyle(color: Colors.red),),
+                                                ],
+                                              ),
                                               const SizedBox(height: 5,),
                                               SizedBox(
                                                 height: 40,
@@ -818,7 +879,7 @@ class _CreateReturnState extends State<CreateReturn> {
                             child: Container(
                               decoration: BoxDecoration(
                                 color: const Color(0xFFFFFFFF),
-                                border: Border.all(color: const Color(0xFFB2C2D3), width: 2),
+                                border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: const [
                                   BoxShadow(
@@ -845,12 +906,12 @@ class _CreateReturnState extends State<CreateReturn> {
                                   const SizedBox(height: 8),
                                   Container(
                                     width: maxWidth,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: const Color(0xFFB2C2D3),
-                                        width: 1.2,
-                                      ),
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      top: BorderSide(color: const Color(0xFFB2C2D3), width: 1.2),
+                                      bottom: BorderSide(color: const Color(0xFFB2C2D3), width: 1.2),
                                     ),
+                                  ),
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 5, bottom: 5),
                                       child: Table(
@@ -1235,7 +1296,7 @@ class _CreateReturnState extends State<CreateReturn> {
                                     blurRadius: 6,
                                   ),
                                 ],
-                                border: Border.all(color: const Color(0xFFB2C2D3), width: 2),
+                                border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Column(
@@ -1389,7 +1450,7 @@ class _CreateReturnState extends State<CreateReturn> {
                                     blurRadius: 6,
                                   ),
                                 ],
-                                border: Border.all(color: const Color(0xFFB2C2D3), width: 2),
+                                border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

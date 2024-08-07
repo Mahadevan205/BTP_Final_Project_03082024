@@ -323,11 +323,22 @@ class _NextPageState extends State<NextPage> {
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 35),
-                  child: IconButton(
+                  child: PopupMenuButton<String>(
                     icon: const Icon(Icons.account_circle),
-                    onPressed: () {
-                      // Handle user icon press
+                    onSelected: (value) {
+                      if (value == 'logout') {
+                        context.go('/');
+                      }
                     },
+                    itemBuilder: (BuildContext context) {
+                      return [
+                        const PopupMenuItem<String>(
+                          value: 'logout',
+                          child: Text('Logout'),
+                        ),
+                      ];
+                    },
+                    offset: const Offset(0, 40), // Adjust the offset to display the menu below the icon
                   ),
                 ),
               ),

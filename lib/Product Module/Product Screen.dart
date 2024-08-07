@@ -171,7 +171,7 @@ class _ProductPageState extends State<ProductPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          backgroundColor: const Color(0xFFFFFFFF),
+          backgroundColor: const Color(0xFFF0F4F8),
           appBar:
           AppBar(
             backgroundColor: const Color(0xFFFFFFFF),
@@ -208,19 +208,6 @@ class _ProductPageState extends State<ProductPage> {
                           if (value == 'logout') {
                             window.sessionStorage.remove('token');
                             context.go('/');
-                            Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (context, animation, secondaryAnimation) => const LoginScr(),
-                                transitionDuration: const Duration(milliseconds: 50),
-                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  return FadeTransition(
-                                    opacity: animation,
-                                    child: child,
-                                  );
-                                },
-                              ),
-                            );
                           }
                         }
                       },
@@ -412,25 +399,34 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only( left: 192),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(
+                        horizontal: 10), // Space above/below the border
+                    width: 1, // Border height
+                    color: Colors.grey, // Border color
+                  ),
+                ),
                 Positioned(
                   top: 0,
                   left: 0,
                   right: 0,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 200),
+                    padding: const EdgeInsets.only(left: 205),
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      color: Colors.white,
+                      color: Color(0xFFFFFDFF),
                       height: 60,
                       child: Row(
                         children: [
                           const Padding(
-                            padding: EdgeInsets.only(left: 30),
+                            padding: EdgeInsets.only(left: 20),
                             child: Text(
                               'Product List',
                               style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                                // fontWeight: FontWeight.bold,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -452,7 +448,7 @@ class _ProductPageState extends State<ProductPage> {
                               },
                               style: OutlinedButton.styleFrom(
                                 backgroundColor: Colors
-                                    .blueAccent, // Button background color
+                                    .blue[800], // Button background color
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
                                       5), // Rounded corners
@@ -462,8 +458,8 @@ class _ProductPageState extends State<ProductPage> {
                               child: const Text(
                                 'Create',
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  // fontWeight: FontWeight.bold,
                                   color: Colors.white,
                                 ),
                               ),
@@ -475,12 +471,12 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 43, left: 200),
+                  padding: const EdgeInsets.only(top: 43, left: 202),
                   child: Container(
                     margin: const EdgeInsets.symmetric(
-                        vertical: 10), // Space above/below the border
-                    height: 3, // Border height
-                    color: Colors.grey[100], // Border color
+                        vertical: 16), // Space above/below the border
+                    height: 1, // Border height
+                    color: Colors.grey, // Border color
                   ),
                 ),
                 Padding(
@@ -489,15 +485,15 @@ class _ProductPageState extends State<ProductPage> {
                     width: maxWidth,
                     height: 800,
                     decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(1),
+                      borderRadius: BorderRadius.circular(8),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.blue
-                              .withOpacity(0.2), // Light blue shadow
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: const Offset(0, 3),
+                          color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(0, 1),
                         ),
                       ],
                     ),
@@ -507,7 +503,7 @@ class _ProductPageState extends State<ProductPage> {
                         behavior: MyCustomScrollBehavior(),
                         child: Scrollbar(
                           thickness: 6,
-                         // scrollbarOrientation: ScrollbarOrientation.left,
+                          // scrollbarOrientation: ScrollbarOrientation.left,
                           thumbVisibility: true,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
@@ -553,7 +549,8 @@ class _ProductPageState extends State<ProductPage> {
           child: Container(
             padding: const EdgeInsets.only(
               left: 20,
-              right: 20, // changed from 800 to 20
+              right: 20,
+              top: 10,// changed from 800 to 20
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -566,20 +563,25 @@ class _ProductPageState extends State<ProductPage> {
                       padding: const EdgeInsets.all(8.0),
                       child: ConstrainedBox(
                         constraints: BoxConstraints(
-                          maxWidth: constraints.maxWidth * 0.415, // 80% of screen width
+                          maxWidth: constraints.maxWidth * 0.315,
+                          maxHeight: 40,// 80% of screen width
                         ),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(4),
-                            border: Border.all(color: Colors.blue[100]!),
+                            border: Border.all(color: Colors.grey),
                           ),
                           child: TextFormField(
                             decoration: const InputDecoration(
                               hintText: 'Search',
-                              contentPadding: EdgeInsets.all(8),
-                              border: OutlineInputBorder(),
-                              suffixIcon: Icon(Icons.search_outlined),
+                              hintStyle: TextStyle(color: Colors.grey),
+                              contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
+                              border: InputBorder.none,
+                              suffixIcon: Padding(
+                                padding: EdgeInsets.only(right: 25),
+                                child: Icon(Icons.search_outlined,color: Colors.indigo,),
+                              ),
                             ),
                             onChanged: _updateSearch,
                           ),
@@ -599,28 +601,34 @@ class _ProductPageState extends State<ProductPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: ConstrainedBox(
                             constraints: BoxConstraints(
-                              maxWidth: constraints.maxWidth * 0.2, // 40% of screen width
+                                maxWidth: constraints.maxWidth * 0.15,
+                                maxHeight: 40// 40% of screen width
                             ),
                             child: Container(
                                 decoration: BoxDecoration(
                                   color: Colors.white,
-                                  borderRadius: BorderRadius.circular(2),
-                                  border: Border.all(color: Colors.blue[100]!),
+                                  borderRadius: BorderRadius.circular(4),
+                                  border: Border.all(color: Colors.grey),
                                 ),
                                 child:
                                 DropdownButtonFormField<String>(
-                                  decoration: const InputDecoration(
-                                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                  decoration:  InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
                                     border: InputBorder.none,
                                     filled: true,
                                     fillColor: Colors.white,
                                     hintText: 'Category',
+                                    suffixIcon: Padding(
+                                      padding: const EdgeInsets.only(right: 28),
+                                      child:  Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blue[800],size: 16,),
+                                    ),
                                   ),
-                                  icon: const Padding(
-                                    padding: EdgeInsets.only(right: 20),
-                                    child: Icon(Icons.arrow_drop_down_outlined),
-                                  ), // default icon
-                                  iconSize: 24, // change the size of the icon
+                                  icon: Container(),
+                                  // icon: const Padding(
+                                  //   padding: EdgeInsets.only(right: 20),
+                                  //   child: Icon(Icons.arrow_drop_down_outlined),
+                                  // ), // default icon
+                                  // iconSize: 24, // change the size of the icon
                                   value: dropdownValue1,
                                   onChanged: (String? newValue) {
                                     setState(() {
@@ -637,7 +645,7 @@ class _ProductPageState extends State<ProductPage> {
                                   ].map<DropdownMenuItem<String>>((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,style: TextStyle(color: Colors.grey)),
                                     );
                                   }).toList(),
                                   isExpanded: true,
@@ -656,26 +664,28 @@ class _ProductPageState extends State<ProductPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: ConstrainedBox(
                             constraints: BoxConstraints(
-                              maxWidth: constraints.maxWidth * 0.2, // 40% of screen width
+                              maxWidth: constraints.maxWidth * 0.15,
+                              // 40% of screen width
+                              maxHeight: 40,
                             ),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(2),
-                                border: Border.all(color: Colors.blue[100]!),
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(color: Colors.grey),
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 20),
                                 child: DropdownButtonFormField<String>(
-                                  decoration: const InputDecoration(
-                                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                  decoration:  InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
                                     border: InputBorder.none,
                                     filled: true,
                                     fillColor: Colors.white,
-                                    hintText: 'Sub Category',
+                                    suffixIcon:  Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blue[800]!,size: 16,),
                                   ),
-                                  icon: const Icon(Icons.arrow_drop_down_outlined), // default icon
-                                  iconSize: 24,
+                                  icon: Container(), // default icon
+                                  // iconSize: 24,
                                   value: dropdownValue2,
                                   onChanged: (String? newValue) {
                                     setState(() {
@@ -688,7 +698,7 @@ class _ProductPageState extends State<ProductPage> {
                                       .map<DropdownMenuItem<String>>((String value) {
                                     return DropdownMenuItem<String>(
                                       value: value,
-                                      child: Text(value),
+                                      child: Text(value,style: TextStyle(color: Colors.grey),),
                                     );
                                   }).toList(),
                                   isExpanded: true,
@@ -728,21 +738,25 @@ class _ProductPageState extends State<ProductPage> {
         Column(
           children: [
             Container(
-              color: const Color(0xFFF7F7F7),
+
               width: _mediaQuery,
+              decoration: BoxDecoration(
+                  color: const Color(0xFFF7F7F7),
+                  border: Border.symmetric(horizontal: BorderSide(color: Colors.grey,width: 0.5))
+              ),
               child:
               DataTable(
-                headingRowHeight: 40,
+                headingRowHeight: 50,
                 columns: [
                   DataColumn(
                     label: Container(
-                      padding: const EdgeInsets.only(left: 30),
+                      padding: const EdgeInsets.only(left: 50),
                       child: Text(
                         'Product Name',
                         style: TextStyle(
-                            color: Colors.indigo[900],
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.indigo[900],
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
@@ -752,9 +766,9 @@ class _ProductPageState extends State<ProductPage> {
                       child: Text(
                         'Category',
                         style: TextStyle(
-                            color: Colors.indigo[900],
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.indigo[900],
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
@@ -764,9 +778,9 @@ class _ProductPageState extends State<ProductPage> {
                       child: Text(
                         'Sub Category',
                         style: TextStyle(
-                            color: Colors.indigo[900],
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.indigo[900],
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
@@ -776,9 +790,9 @@ class _ProductPageState extends State<ProductPage> {
                       child: Text(
                         'Unit',
                         style: TextStyle(
-                            color: Colors.indigo[900],
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.indigo[900],
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
@@ -788,9 +802,9 @@ class _ProductPageState extends State<ProductPage> {
                       child: Text(
                         'Price',
                         style: TextStyle(
-                            color: Colors.indigo[900],
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.indigo[900],
+                          fontSize: 18,
+                        ),
                       ),
                     ),
                   ),
@@ -862,7 +876,7 @@ class _ProductPageState extends State<ProductPage> {
                               child: Text(
                                 product.productName,
                                 style: TextStyle(
-                                  fontSize: 15,
+                                  fontSize: 16,
                                   color: isSelected
                                       ? Colors.deepOrange[200]
                                       : const Color(0xFFFFB315),
@@ -910,10 +924,10 @@ class _ProductPageState extends State<ProductPage> {
                               );
                             },
                             child: Container(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.only(left: 12),
                               child: Text(
                                 product.category,
-                                style: const TextStyle(color: Color(0xFFA6A6A6)),
+                                style: const TextStyle(color: Color(0xFFA6A6A6),fontSize: 16),
                               ),
                             ),
                           ),
@@ -957,11 +971,11 @@ class _ProductPageState extends State<ProductPage> {
                               );
                             },
                             child: Container(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: const EdgeInsets.only(left: 40),
                               child: Text(
                                 product.subCategory,
                                 style: const TextStyle(
-                                  color: Color(0xFFA6A6A6),
+                                  color: Color(0xFFA6A6A6),fontSize: 16,
                                 ),
                               ),
                             ),
@@ -1009,7 +1023,7 @@ class _ProductPageState extends State<ProductPage> {
                               padding: const EdgeInsets.only(left: 20),
                               child: Text(
                                 product.unit,
-                                style: const TextStyle(color: Color(0xFFA6A6A6)),
+                                style: const TextStyle(color: Color(0xFFA6A6A6),fontSize: 16),
                               ),
                             ),
                           ),
@@ -1056,7 +1070,7 @@ class _ProductPageState extends State<ProductPage> {
                               padding: const EdgeInsets.only(left: 10),
                               child: Text(
                                 product.price.toString(),
-                                style: const TextStyle(color: Color(0xFFA6A6A6)),
+                                style: const TextStyle(color: Color(0xFFA6A6A6),fontSize: 16),
                               ),
                             ),
                           ),
@@ -1141,6 +1155,5 @@ class _ProductPageState extends State<ProductPage> {
   }
 
 }
-
 
 

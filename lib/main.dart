@@ -73,7 +73,19 @@ class MyApp extends StatelessWidget {
     routes:<RouteBase> [
       GoRoute(
         path: '/',
-        builder: (context, state) => const LoginScr(),
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: LoginScr(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: Duration(milliseconds: 5), // Adjust transition duration if needed
+          );
+        },
       ),
       GoRoute(
         path: '/Home',
@@ -129,6 +141,22 @@ class MyApp extends StatelessWidget {
           return CustomTransitionPage(
             key: state.pageKey,
             child: ProductPage(product: null,),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: Duration(milliseconds: 5), // Adjust transition duration if needed
+          );
+        },
+      ),
+      GoRoute(
+        path: '/Create_Product/Home',
+        pageBuilder: (context, state) {
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child: DashboardPage(),
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return FadeTransition(
                 opacity: animation,
@@ -239,6 +267,24 @@ class MyApp extends StatelessWidget {
             key: state.pageKey,
             child:
             ReturnView(returnMaster: returnMaster),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
+            transitionDuration: Duration(milliseconds: 5), // Adjust transition duration if needed
+          );
+        },
+      ),
+      GoRoute(
+        path: '/return-view/Return',
+        pageBuilder: (context, state) {
+         // final returnMaster = state.extra as ReturnMaster?;
+          return CustomTransitionPage(
+            key: state.pageKey,
+            child:
+            Returnpage(),
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return FadeTransition(
                 opacity: animation,
@@ -1567,26 +1613,15 @@ class MyApp extends StatelessWidget {
           final extra = state.extra as Map<String, dynamic>? ?? {};
 
           // Extracting the passed arguments
-          final List<Product> products = extra['products'] ?? [];
-          final List<Product> selectedProducts = extra['selectedProducts'] ?? [];
-          final Product selectedProduct = extra['selectedProduct'] ?? Product(
-              prodId: '', category: '', productName: '', subCategory: '',
-              unit: '', selectedUOM: '', selectedVariation: '',
-              quantity: 0, total: 0, totalamount: 0, tax: '',
-              discount: '', price: 0, imageId: '',qty: 0,totalAmount: 0,
-          );
-          final Map<String, dynamic> data2 = extra['data2'] ?? {};
 
           return CustomTransitionPage(
             key: state.pageKey,
-            child: NextPage(
-              data: data2,
-              product: selectedProduct,
-              inputText: '',
-              products: products,
-              subText: 'hii',
-              selectedProducts: selectedProducts,
-              notselect: 'selectedproduct',
+            child: SixthPage(
+              product: extra['product'] as detail?,
+              item: extra['item'] as List<Map<String, dynamic>>?,
+              body: extra['body'] as Map<String, dynamic>,
+              itemsList: extra['itemsList'] as List<Map<String, dynamic>>,
+              orderDetails: List<OrderDetail>.from(extra['orderDetails']),
             ),
             transitionsBuilder: (context, animation, secondaryAnimation, child) {
               return FadeTransition(

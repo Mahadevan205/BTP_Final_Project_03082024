@@ -169,24 +169,7 @@ class OrderPage3State extends State<OrderPage3> {
                       onSelected: (value) {
                         if (value == 'logout') {
                           context.go('/');
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                              const LoginScr(
-                              ),
-                              transitionDuration:
-                              const Duration(milliseconds: 200),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+
                         }
                       },
                       itemBuilder: (BuildContext context) {

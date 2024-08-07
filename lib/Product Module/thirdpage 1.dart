@@ -106,8 +106,8 @@ class _ProductForm1State extends State<ProductForm1> {
     else if(searchText.isEmpty) {
       await fetchProducts();
     }
-      else
-  {
+    else
+    {
       setState(() {
         productList = [];
       });
@@ -421,24 +421,6 @@ class _ProductForm1State extends State<ProductForm1> {
                     onSelected: (value) {
                       if (value == 'logout') {
                         context.go('/');
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                            const LoginScr(
-                            ),
-                            transitionDuration:
-                            const Duration(milliseconds: 200),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ),
-                        );
                       }
                     },
                     itemBuilder: (BuildContext context) {
@@ -460,7 +442,7 @@ class _ProductForm1State extends State<ProductForm1> {
             builder: (context, constraints) {
               double maxHeight = constraints.maxHeight;
               double maxWidth = constraints.maxWidth;
-/// For web view
+              /// For web view
               return Stack(
                 children: [
                   Align(
@@ -604,6 +586,167 @@ class _ProductForm1State extends State<ProductForm1> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 200,top: 0),
+                    child: Container(
+                      width: 1.8, // Set the width to 1 for a vertical line
+                      height: maxHeight, // Set the height to your liking
+                      decoration: BoxDecoration(
+                        border: Border(left: BorderSide(width: 1, color: Colors.grey)),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 200),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        color: Colors.white,
+                        height: 60,
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(
+                                  Icons.arrow_back), // Back button icon
+                              onPressed: () {
+                                context.go('/Products');
+                                // Navigator.of(context).push(PageRouteBuilder(
+                                //   pageBuilder: (context, animation,
+                                //       secondaryAnimation) =>
+                                //       const ProductPage(product: null),
+                                // ));
+                              },
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.only(left: 20),
+                              child: Text(
+                                'Product List',
+                                style: TextStyle(
+                                  fontSize: 25,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            const Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 30),
+                              child: OutlinedButton(
+                                onPressed: () {
+
+                                  print('---- image path-----');
+                                  print(storeImageBytes1);
+                                  print(priceController.text);
+                                  print(discountController.text);
+                                  print(subCategoryController.text);
+                                  print(categoryController.text);
+                                  print(unitController.text);
+                                  print(taxController.text);
+                                  print(productNameController.text);
+                                  print('hii');
+                                  print(widget.displayData['imageId'] ?? "");
+                                  print(imageIdContoller.text);
+                                  final inputText = categoryController.text;
+                                  final subText = subCategoryController.text;
+                                  final unitText = unitController.text;
+                                  final taxText = taxController.text;
+                                  final prodText = prodIdController.text;
+
+                                  if (storeImageBytes1 != null &&
+                                      productNameController.text.isNotEmpty &&
+                                      priceController.text.isNotEmpty &&
+                                      discountController.text.isNotEmpty) {
+                                    _textInput = productNameController.text;
+                                    _priceInput = priceController.text;
+                                    discountInput = discountController.text;
+                                    context.go('/dashboard/productpage/:Edit/Edit', extra: {
+                                      'prodId': prodText ?? '',
+                                      'textInput': _textInput ?? '',
+                                      'priceInput': _priceInput ?? '',
+                                      'discountInput': discountInput ?? '',
+                                      'inputText': inputText ?? '',
+                                      'subText': subText ?? '',
+                                      'unitText': unitText ?? '',
+                                      'taxText': taxText ?? '',
+                                      'imagePath': storeImageBytes1 ?? '',
+                                      'imageId': widget.displayData['imageId']?? imageIdContoller.text?? '',
+                                      'productData': {}, // or pass the actual product data
+                                    });
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (context) => EditOrder(
+                                    //       prodId: prodText,
+                                    //       // product: null,
+                                    //       textInput: _textInput,
+                                    //       priceInput: _priceInput,
+                                    //       discountInput: discountInput,
+                                    //       inputText: inputText,
+                                    //       subText: subText,
+                                    //       unitText: unitText,
+                                    //       taxText: taxText,
+                                    //       imagePath: storeImageBytes1,
+                                    //       imageId:
+                                    //       widget.displayData['imageId'] ??
+                                    //           imageIdContoller.text ??
+                                    //           "",
+                                    //       productData: {},
+                                    //     ),
+                                    //   ),
+                                    // );
+                                  } else {
+                                    // Handle case when imagePath is null or other required fields are empty
+                                    print(
+                                        'Error: Image path is null or other required fields are empty.');
+                                  }
+                                },
+                                style: OutlinedButton.styleFrom(
+                                  backgroundColor: Colors
+                                      .blue[800], // Button background color
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        5), // Rounded corners
+                                  ),
+                                  side: BorderSide.none, // No outline
+                                ),
+                                child: Text(
+                                  isEditing ? 'Edit' : 'Edit',
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 43, left: 200),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10), // Space above/below the border
+                      height: 1, // Border height
+                      color: Colors.grey, // Border color
+                      width: 1000,
+                    ),
+                  ),
+                  Padding(
+                    padding:  const EdgeInsets.only(top: 0, left: 450),
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10), // Space above/below the border
+                      height: constraints.maxHeight,
+                      // width: 1500,
+                      width: 2,// Border height
+                      color: Colors.grey[300], // Border color
+                    ),
+                  ),
                   Container(
                     margin: const EdgeInsets.only(
                       top: 60,
@@ -654,80 +797,82 @@ class _ProductForm1State extends State<ProductForm1> {
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: ListView.builder(
-                            itemCount: productList.length,
-                            itemBuilder: (context, index) {
-                              final Product = productList[index];
-                              bool isSelected = Product.productName ==
-                                  productNameController.text;
-                              productList.sort((a, b) {
-                                if (a.productName ==
-                                    productNameController.text) {
-                                  return -1; // selected product name comes first
-                                } else if (b.productName ==
-                                    productNameController.text) {
-                                  return 1; // selected product name comes first
-                                } else {
-                                  final aIsNumber = a.productName[0]
-                                      .contains(RegExp(r'[0-90]'));
-                                  final bIsNumber = b.productName[0]
-                                      .contains(RegExp(r'[0-90]'));
-
-                                  if (aIsNumber && !bIsNumber) {
-                                    return 1;
-                                  } else if (!aIsNumber && bIsNumber) {
-                                    return -1;
+                          child: ListView.separated(
+                              itemCount: productList.length,
+                              itemBuilder: (context, index) {
+                                final Product = productList[index];
+                                bool isSelected = Product.productName ==
+                                    productNameController.text;
+                                productList.sort((a, b) {
+                                  if (a.productName ==
+                                      productNameController.text) {
+                                    return -1; // selected product name comes first
+                                  } else if (b.productName ==
+                                      productNameController.text) {
+                                    return 1; // selected product name comes first
                                   } else {
-                                    return a.productName
-                                        .compareTo(b.productName);
+                                    final aIsNumber = a.productName[0]
+                                        .contains(RegExp(r'[0-90]'));
+                                    final bIsNumber = b.productName[0]
+                                        .contains(RegExp(r'[0-90]'));
+
+                                    if (aIsNumber && !bIsNumber) {
+                                      return 1;
+                                    } else if (!aIsNumber && bIsNumber) {
+                                      return -1;
+                                    } else {
+                                      return a.productName
+                                          .compareTo(b.productName);
+                                    }
                                   }
-                                }
-                              });
-                              return GestureDetector(
-                                onTap: () {
-                                  //context.go('/dasbaord/productpage/ontap');
-                                  setState(() {
-                                    productNameController.text =
-                                        Product.productName;
-                                    prodIdController.text = Product.prodId;
-                                    print(prodIdController.text);
-                                    categoryController.text = Product.category;
-                                    subCategoryController.text =
-                                        Product.subCategory;
-                                    taxController.text = Product.tax;
-                                    unitController.text = Product.unit;
-                                    priceController.text =
-                                        Product.price.toString();
-                                    discountController.text = Product.discount;
-                                    imageIdContoller.text = Product.imageId;
-                                    print('---iamde');
-                                    _displayData['imageId'] = imageIdContoller.text;
+                                });
+                                return GestureDetector(
+                                  onTap: () {
+                                    //context.go('/dasbaord/productpage/ontap');
+                                    setState(() {
+                                      productNameController.text =
+                                          Product.productName;
+                                      prodIdController.text = Product.prodId;
+                                      print(prodIdController.text);
+                                      categoryController.text = Product.category;
+                                      subCategoryController.text =
+                                          Product.subCategory;
+                                      taxController.text = Product.tax;
+                                      unitController.text = Product.unit;
+                                      priceController.text =
+                                          Product.price.toString();
+                                      discountController.text = Product.discount;
+                                      imageIdContoller.text = Product.imageId;
+                                      print('---iamde');
+                                      _displayData['imageId'] = imageIdContoller.text;
 // widget.displayData['imageId'] =
 //     imageIdContoller.text;
-                                    print(imageIdContoller.text);
-                                    fetchImage(productList[index].imageId);
-                                  });
-                                },
-                                child: Container(
-                                  decoration: isSelected
-                                      ? BoxDecoration(
-                                      color: Colors
-                                          .lightBlue[100]) // selected color
-                                      :null,
-                                  child: ListTile(
-                                    title: Text(
-                                      '${Product.productName}',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                      print(imageIdContoller.text);
+                                      fetchImage(productList[index].imageId);
+                                    });
+                                  },
+                                  child: Container(
+                                    decoration: isSelected
+                                        ? BoxDecoration(
+                                        color: Colors
+                                            .lightBlue[100]) // selected color
+                                        :null,
+                                    child: ListTile(
+                                      title: Text(
+                                        '${Product.productName}',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      subtitle: Text('${Product.category}'),
+                                      tileColor: isSelected
+                                          ? Colors.lightBlue[100]
+                                          : null,
                                     ),
-                                    subtitle: Text('${Product.category}'),
-                                    tileColor: isSelected
-                                        ? Colors.lightBlue[100]
-                                        : null,
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return const Divider();}
                           ),
                         ),
                       ],
@@ -745,8 +890,17 @@ class _ProductForm1State extends State<ProductForm1> {
                         width: maxWidth * 0.2,
                         height: maxHeight *0.4,
                         decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
                           color: Colors.grey[300],
-                          borderRadius: BorderRadius.circular(4),
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                              spreadRadius: 1,
+                              blurRadius: 3,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
                         ),
                         child: Image.memory(storeImageBytes1!),
                       )
@@ -770,157 +924,6 @@ class _ProductForm1State extends State<ProductForm1> {
                             context), // Use the ProductForm widget here
                       ),
                     ],
-                  ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 200),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        color: Colors.white,
-                        height: 60,
-                        child: Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(
-                                  Icons.arrow_back), // Back button icon
-                              onPressed: () {
-                                context.go('/Products');
-                                // Navigator.of(context).push(PageRouteBuilder(
-                                //   pageBuilder: (context, animation,
-                                //       secondaryAnimation) =>
-                                //       const ProductPage(product: null),
-                                // ));
-                              },
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(left: 30),
-                              child: Text(
-                                'Product List',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                            const Spacer(),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 30),
-                              child: OutlinedButton(
-                                onPressed: () {
-
-                                  print('---- image path-----');
-                                  print(storeImageBytes1);
-                                  print(priceController.text);
-                                  print(discountController.text);
-                                  print(subCategoryController.text);
-                                  print(categoryController.text);
-                                  print(unitController.text);
-                                  print(taxController.text);
-                                  print(productNameController.text);
-                                  print('hii');
-                                  print(widget.displayData['imageId'] ?? "");
-                                  print(imageIdContoller.text);
-                                  final inputText = categoryController.text;
-                                  final subText = subCategoryController.text;
-                                  final unitText = unitController.text;
-                                  final taxText = taxController.text;
-                                  final prodText = prodIdController.text;
-
-                                  if (storeImageBytes1 != null &&
-                                      productNameController.text.isNotEmpty &&
-                                      priceController.text.isNotEmpty &&
-                                      discountController.text.isNotEmpty) {
-                                    _textInput = productNameController.text;
-                                    _priceInput = priceController.text;
-                                    discountInput = discountController.text;
-                                    context.go('/dashboard/productpage/:Edit/Edit', extra: {
-                                      'prodId': prodText ?? '',
-                                      'textInput': _textInput ?? '',
-                                      'priceInput': _priceInput ?? '',
-                                      'discountInput': discountInput ?? '',
-                                      'inputText': inputText ?? '',
-                                      'subText': subText ?? '',
-                                      'unitText': unitText ?? '',
-                                      'taxText': taxText ?? '',
-                                      'imagePath': storeImageBytes1 ?? '',
-                                      'imageId': widget.displayData['imageId']?? imageIdContoller.text?? '',
-                                      'productData': {}, // or pass the actual product data
-                                   });
-                                    // Navigator.push(
-                                    //   context,
-                                    //   MaterialPageRoute(
-                                    //     builder: (context) => EditOrder(
-                                    //       prodId: prodText,
-                                    //       // product: null,
-                                    //       textInput: _textInput,
-                                    //       priceInput: _priceInput,
-                                    //       discountInput: discountInput,
-                                    //       inputText: inputText,
-                                    //       subText: subText,
-                                    //       unitText: unitText,
-                                    //       taxText: taxText,
-                                    //       imagePath: storeImageBytes1,
-                                    //       imageId:
-                                    //       widget.displayData['imageId'] ??
-                                    //           imageIdContoller.text ??
-                                    //           "",
-                                    //       productData: {},
-                                    //     ),
-                                    //   ),
-                                    // );
-                                  } else {
-                                    // Handle case when imagePath is null or other required fields are empty
-                                    print(
-                                        'Error: Image path is null or other required fields are empty.');
-                                  }
-                                },
-                                style: OutlinedButton.styleFrom(
-                                  backgroundColor: Colors
-                                      .blueAccent, // Button background color
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        5), // Rounded corners
-                                  ),
-                                  side: BorderSide.none, // No outline
-                                ),
-                                child: Text(
-                                  isEditing ? 'Edit' : 'Edit',
-                                  style: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 43, left: 200),
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                          vertical: 10), // Space above/below the border
-                      height: 3, // Border height
-                      color: Colors.grey[100], // Border color
-                    ),
-                  ),
-                  Padding(
-                    padding:  const EdgeInsets.only(top: 0, left: 450),
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 10), // Space above/below the border
-                      height: constraints.maxHeight,
-                      // width: 1500,
-                      width: 2,// Border height
-                      color: Colors.grey[300], // Border color
-                    ),
                   ),
                 ],
               );
@@ -1009,61 +1012,6 @@ class _ProductForm1State extends State<ProductForm1> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          actions: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: IconButton(
-                icon: const Icon(Icons.notifications),
-                onPressed: () {
-                  // Handle notification icon press
-                },
-              ),
-            ),
-            const SizedBox(width: 10,),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 35),
-                child: PopupMenuButton<String>(
-                  icon: const Icon(Icons.account_circle),
-                  onSelected: (value) {
-                    if (value == 'logout') {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                          const LoginScr(
-                          ),
-                          transitionDuration:
-                          const Duration(milliseconds: 200),
-                          transitionsBuilder: (context, animation,
-                              secondaryAnimation, child) {
-                            return FadeTransition(
-                              opacity: animation,
-                              child: child,
-                            );
-                          },
-                        ),
-                      );
-                    }
-                  },
-                  itemBuilder: (BuildContext context) {
-                    return [
-                      const PopupMenuItem<String>(
-                        value: 'logout',
-                        child: Text('Logout'),
-                      ),
-                    ];
-                  },
-                  offset: const Offset(0, 40), // Adjust the offset to display the menu below the icon
-                ),
-              ),
-            ),
-          ],
-        ),
         body: LayoutBuilder(
             builder: (context, constraints) {
               double maxHeight = constraints.maxHeight;
@@ -1086,9 +1034,9 @@ class _ProductForm1State extends State<ProductForm1> {
                           child: Text(
                             'Product  Name',
                             style: TextStyle(
-                                color: Colors.indigo[900],
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold),
+                              color: Colors.blue[900],
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                         const SizedBox(height: 2),
@@ -1109,7 +1057,7 @@ class _ProductForm1State extends State<ProductForm1> {
                                 const EdgeInsets.symmetric(horizontal: 10),
                                 border: InputBorder.none,
                                 filled: true,
-                                hintText: 'Enter product Name',
+                                // hintText: 'Enter product Name',
                                 errorText: errorMessage,
                               ),
                               inputFormatters: [
@@ -1146,9 +1094,9 @@ class _ProductForm1State extends State<ProductForm1> {
                                 child: Text(
                                   'Category',
                                   style: TextStyle(
-                                      color: Colors.indigo[900],
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.blue[900],
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 2),
@@ -1189,9 +1137,9 @@ class _ProductForm1State extends State<ProductForm1> {
                                 child: Text(
                                   'Sub Category',
                                   style: TextStyle(
-                                      color: Colors.indigo[900],
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.blue[900],
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 2),
@@ -1236,9 +1184,9 @@ class _ProductForm1State extends State<ProductForm1> {
                                 child: Text(
                                   'Tax',
                                   style: TextStyle(
-                                      color: Colors.indigo[900],
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.blue[900],
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 2),
@@ -1279,9 +1227,9 @@ class _ProductForm1State extends State<ProductForm1> {
                                 child: Text(
                                   'Unit',
                                   style: TextStyle(
-                                      color: Colors.indigo[900],
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.blue[900],
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 2),
@@ -1326,9 +1274,9 @@ class _ProductForm1State extends State<ProductForm1> {
                                 child: Text(
                                   'Price ',
                                   style: TextStyle(
-                                      color: Colors.indigo[900],
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.blue[900],
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 2),
@@ -1388,9 +1336,9 @@ class _ProductForm1State extends State<ProductForm1> {
                                 child: Text(
                                   'Discount',
                                   style: TextStyle(
-                                      color: Colors.indigo[900],
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
+                                    color: Colors.blue[900],
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 2),

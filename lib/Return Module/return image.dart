@@ -15,6 +15,13 @@ import '../Order Module/firstpage.dart';
 import '../widgets/productclass.dart';
 
 
+void main(){
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: ReturnImage(orderDetails: [], storeImages: [], imageSizeStrings: [], orderDetailsMap: {}) ,));
+}
+
+
 class ReturnImage extends StatefulWidget {
   final List<dynamic> orderDetails;
   List<String> storeImages = [];
@@ -205,7 +212,7 @@ class _ReturnImageState extends State<ReturnImage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFF0F4F8),
         appBar:
         AppBar(
           automaticallyImplyLeading: false,
@@ -241,24 +248,6 @@ class _ReturnImageState extends State<ReturnImage> {
                     onSelected: (value) {
                       if (value == 'logout') {
                         context.go('/');
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                            const LoginScr(
-                            ),
-                            transitionDuration:
-                            const Duration(milliseconds: 200),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ),
-                        );
                       }
                     },
                     itemBuilder: (BuildContext context) {
@@ -455,16 +444,26 @@ class _ReturnImageState extends State<ReturnImage> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 200,top: 0),
+                child: Container(
+                  width: 1, // Set the width to 1 for a vertical line
+                  height: 900, // Set the height to your liking
+                  decoration: BoxDecoration(
+                    border: Border(left: BorderSide(width: 1, color: Colors.grey)),
+                  ),
+                ),
+              ),
               Positioned(
                 top: 0,
                 left: 0,
                 right: 0,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 200),
+                  padding: const EdgeInsets.only(left: 201),
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     color: Colors.white,
-                    height: 60,
+                    height: 50,
                     child: Row(
                       children: [
                         IconButton(
@@ -583,13 +582,13 @@ class _ReturnImageState extends State<ReturnImage> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 43, left: 200),
+                padding: const EdgeInsets.only(top: 50 ,left: 200),
                 child: Container(
                   margin: const EdgeInsets.symmetric(
-                      vertical: 10),
+                      vertical: 1),
                   // Space above/below the border
-                  height: 3, // Border height
-                  color: Colors.grey[100], // Border color
+                  height: 0.3, // Border height
+                  color: Colors.black, // Border color
                 ),
               ),
               GestureDetector(
@@ -642,7 +641,7 @@ class _ReturnImageState extends State<ReturnImage> {
               ),
               //SizedBox(height: 60,),
               Padding(
-                  padding:  EdgeInsets.only(top: 450,left: size * 0.34,right: size*0.3),
+                  padding:  EdgeInsets.only(top: 500,left: size * 0.34,right: size*0.3),
                   child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
@@ -674,7 +673,7 @@ class _ReturnImageState extends State<ReturnImage> {
                                       borderRadius: BorderRadius.circular(5.0),
                                       borderSide: const BorderSide(color: Colors.blue), // Set enabled border color here
                                     ),
-                                    hintText: 'select a reason',
+                                    hintText: 'Select a Reason',
                                     contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                                     suffixIcon: const Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blueAccent,), // Add arrow down icon here
                                   ),

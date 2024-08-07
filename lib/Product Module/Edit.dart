@@ -308,24 +308,6 @@ class _EditOrderState extends State<EditOrder> {
                     onSelected: (value) {
                       if (value == 'logout') {
                         context.go('/');
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                            const LoginScr(
-                            ),
-                            transitionDuration:
-                            const Duration(milliseconds: 200),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ),
-                        );
                       }
                     },
                     itemBuilder: (BuildContext context) {
@@ -365,7 +347,7 @@ class _EditOrderState extends State<EditOrder> {
                         onPressed: () {
                           print('prodId');
                           print(prodIdController.text);
-                           storeImage = '';
+                          storeImage = '';
                           uploadImage(storeImage);
                           // fetchImage(storeImage);
                           widget.productData['imageId'] = storeImage == ""
@@ -407,12 +389,12 @@ class _EditOrderState extends State<EditOrder> {
                         },
                       ),
                       const Padding(
-                        padding: EdgeInsets.only(left: 30),
+                        padding: EdgeInsets.only(left: 20),
                         child: Text(
                           'Edit',
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                            // fontWeight: FontWeight.bold,
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -439,10 +421,10 @@ class _EditOrderState extends State<EditOrder> {
                               print(widget.imageId);
                               loadImage(widget.imageId);
                               //uploadImage(widget.imageId);
-                                     },
+                            },
                             style: OutlinedButton.styleFrom(
                               backgroundColor:
-                              Colors.grey.shade200, // Blue background color
+                              Colors.grey[300], // Blue background color
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
                                     5), // Rounded corners
@@ -559,7 +541,7 @@ class _EditOrderState extends State<EditOrder> {
                             },
                             style: OutlinedButton.styleFrom(
                               backgroundColor: Colors
-                                  .blueAccent, // Button background color
+                                  .blue[800], // Button background color
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(
                                     5), // Rounded corners
@@ -586,8 +568,8 @@ class _EditOrderState extends State<EditOrder> {
                 child: Container(
                   margin: const EdgeInsets.symmetric(
                       vertical: 10), // Space above/below the border
-                  height: 3, // Border height
-                  color: Colors.grey[100], // Border color
+                  height: 1, // Border height
+                  color: Colors.grey, // Border color
                 ),
               ),
               Row(
@@ -763,9 +745,22 @@ class _EditOrderState extends State<EditOrder> {
                               width: maxWidth * 0.3,
                               height: maxHeight * 1.2,
                               decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
                                 color: Colors.grey[300],
-                                borderRadius: BorderRadius.circular(4),
+                                borderRadius: BorderRadius.circular(8),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                                    spreadRadius: 1,
+                                    blurRadius: 3,
+                                    offset: const Offset(0, 1),
+                                  ),
+                                ],
                               ),
+                              // decoration: BoxDecoration(
+                              //   color: Colors.grey[300],
+                              //   borderRadius: BorderRadius.circular(4),
+                              // ),
                               child: Stack(
                                 alignment: Alignment.center,
                                 children: [
@@ -827,16 +822,16 @@ class _EditOrderState extends State<EditOrder> {
                                 Padding(
                                   padding: const EdgeInsets.all(4.0),
                                   child: RichText(
-                                    text: const TextSpan(
+                                    text:  TextSpan(
                                       children: [
                                         TextSpan(
                                           text: 'Product Name ',
                                           style: TextStyle(
-                                            color: Colors
-                                                .grey, // Set the product name to black color
+                                            color: Colors.blue[900],
+                                            fontSize: 16,/// Set the product name to black color
                                           ),
                                         ),
-                                        TextSpan(
+                                        const TextSpan(
                                           text: '*',
                                           style: TextStyle(
                                             color: Colors
@@ -869,6 +864,7 @@ class _EditOrderState extends State<EditOrder> {
                                         border: InputBorder.none,
                                         filled: true,
                                         hintText: 'Enter product name',
+                                        hintStyle: TextStyle(color: Colors.grey),
                                         errorText: errorMessage,
                                       ),
                                       inputFormatters: [
@@ -909,16 +905,16 @@ class _EditOrderState extends State<EditOrder> {
                                           alignment: const  Alignment(-1.0,-0.3),
 
                                           child: RichText(
-                                            text: const TextSpan(
+                                            text:  TextSpan(
                                               children: [
                                                 TextSpan(
                                                   text: 'Category ',
                                                   style: TextStyle(
-                                                    color: Colors
-                                                        .grey, // Set the product name to black color
+                                                    color: Colors.blue[900],
+                                                    fontSize: 16,//// Set the product name to black color
                                                   ),
                                                 ),
-                                                TextSpan(
+                                                const TextSpan(
                                                   text: '*',
                                                   style: TextStyle(
                                                     color: Colors
@@ -973,10 +969,8 @@ class _EditOrderState extends State<EditOrder> {
                                                           child: Text(value),
                                                         );
                                                       }).toList(),
-                                                  icon: const Icon(Icons
-                                                      .arrow_drop_down), // Custom icon
-                                                  iconSize:
-                                                  24, // Custom icon size
+                                                  icon:  Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blue[800],),
+                                                  iconSize: 18,
                                                   isExpanded:
                                                   true, // Ensures the dropdown fills the width
                                                 ),
@@ -1000,13 +994,14 @@ class _EditOrderState extends State<EditOrder> {
                                         child: Align(
                                           alignment: const Alignment(-1.0,-0.3),
                                           child: RichText(
-                                            text: const TextSpan(
+                                            text:  TextSpan(
                                               children: [
                                                 TextSpan(
                                                   text: 'Sub Category ',
                                                   style: TextStyle(
                                                     color: Colors
-                                                        .grey, // Set the product name to black color
+                                                        .blue[900], //
+                                                    fontSize: 16,// Set the product name to black color
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -1063,12 +1058,9 @@ class _EditOrderState extends State<EditOrder> {
                                                           child: Text(value),
                                                         );
                                                       }).toList(),
-                                                  icon: const Icon(Icons
-                                                      .arrow_drop_down), // Custom icon
-                                                  iconSize:
-                                                  24, // Custom icon size
-                                                  isExpanded:
-                                                  true, // Ensures the dropdown fills the width
+                                                  icon:  Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blue[800],),
+                                                  iconSize: 18,
+                                                  isExpanded: true, // Ensures the dropdown fills the width
                                                 ),
                                               ),
                                             ),
@@ -1091,16 +1083,17 @@ class _EditOrderState extends State<EditOrder> {
                                       Padding(
                                         padding: const EdgeInsets.all(4.0),
                                         child: RichText(
-                                          text: const TextSpan(
+                                          text:  TextSpan(
                                             children: [
                                               TextSpan(
                                                 text: 'Tax ',
                                                 style: TextStyle(
                                                   color: Colors
-                                                      .grey, // Set the product name to black color
+                                                      .blue[900],
+                                                  fontSize: 16,// Set the product name to black color
                                                 ),
                                               ),
-                                              TextSpan(
+                                              const TextSpan(
                                                 text: '*',
                                                 style: TextStyle(
                                                   color: Colors
@@ -1155,10 +1148,8 @@ class _EditOrderState extends State<EditOrder> {
                                                           child: Text(value),
                                                         );
                                                       }).toList(),
-                                                  icon: const Icon(Icons
-                                                      .arrow_drop_down), // Custom icon
-                                                  iconSize:
-                                                  24, // Custom icon size
+                                                  icon:  Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blue[800],),
+                                                  iconSize: 18,
                                                   isExpanded:
                                                   true, // Ensures the dropdown fills the width
                                                 ),
@@ -1179,16 +1170,17 @@ class _EditOrderState extends State<EditOrder> {
                                       Padding(
                                         padding: const EdgeInsets.all(4.0),
                                         child: RichText(
-                                          text: const TextSpan(
+                                          text: TextSpan(
                                             children: [
                                               TextSpan(
                                                 text: 'Unit ',
                                                 style: TextStyle(
                                                   color: Colors
-                                                      .grey, // Set the product name to black color
+                                                      .blue[900],
+                                                  fontSize: 16,// Set the product name to black color
                                                 ),
                                               ),
-                                              TextSpan(
+                                              const TextSpan(
                                                 text: '*',
                                                 style: TextStyle(
                                                   color: Colors
@@ -1242,10 +1234,8 @@ class _EditOrderState extends State<EditOrder> {
                                                           child: Text(value),
                                                         );
                                                       }).toList(),
-                                                  icon: const Icon(Icons
-                                                      .arrow_drop_down), // Custom icon
-                                                  iconSize:
-                                                  24, // Custom icon size
+                                                  icon:  Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blue[800],),
+                                                  iconSize: 18,
                                                   isExpanded:
                                                   true, // Ensures the dropdown fills the width
                                                 ),
@@ -1273,16 +1263,16 @@ class _EditOrderState extends State<EditOrder> {
                                           alignment:const Alignment(-1.0,-0.3),
 
                                           child: RichText(
-                                            text: const TextSpan(
+                                            text:  TextSpan(
                                               children: [
                                                 TextSpan(
                                                   text: 'Price ',
                                                   style: TextStyle(
                                                     color: Colors
-                                                        .grey, // Set the product name to black color
+                                                        .blue[900], // Set the product name to black color
                                                   ),
                                                 ),
-                                                TextSpan(
+                                                const TextSpan(
                                                   text: '*',
                                                   style: TextStyle(
                                                     color: Colors
@@ -1324,6 +1314,7 @@ class _EditOrderState extends State<EditOrder> {
                                               border: InputBorder.none,
                                               filled: true,
                                               hintText: 'Enter Price',
+                                              hintStyle: TextStyle(color: Colors.grey),
                                               errorText: errorMessage,
                                             ),
                                             onChanged: (value) {
@@ -1356,13 +1347,15 @@ class _EditOrderState extends State<EditOrder> {
                                         child: Align(
                                           alignment: const Alignment(-1.0,-0.3),
                                           child: RichText(
-                                            text: const TextSpan(
+                                            text:  TextSpan(
                                               children: [
                                                 TextSpan(
                                                   text: 'Discount ',
                                                   style: TextStyle(
                                                     color: Colors
-                                                        .grey, // Set the product name to black color
+                                                        .blue[900],
+                                                    fontSize: 16,
+                                                    // Set the product name to black color
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -1409,6 +1402,7 @@ class _EditOrderState extends State<EditOrder> {
                                               border: InputBorder.none,
                                               filled: true,
                                               hintText: 'Enter Discount',
+                                              hintStyle: TextStyle(color: Colors.grey),
                                               errorText: errorMessage,
                                             ),
                                             onChanged: (value) {
@@ -1473,3 +1467,4 @@ customerFieldDecoration(
     const OutlineInputBorder(borderSide: BorderSide(color: Colors.blue)),
   );
 }
+

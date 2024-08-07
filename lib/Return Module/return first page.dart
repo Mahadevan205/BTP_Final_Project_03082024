@@ -18,9 +18,10 @@ import '../screen/login.dart';
 import '../Order Module/firstpage.dart';
 import '../widgets/mycustomscrollbehavior.dart';
 
-
-
-
+void main(
+){
+  runApp(Returnpage());
+}
 
 class Returnpage extends StatefulWidget {
   const Returnpage({super.key});
@@ -56,16 +57,30 @@ class _ReturnpageState extends State<Returnpage> {
 
 
 
-
-
   @override
   void initState() {
     super.initState();
     _dateController = TextEditingController();
-    fetchReturnMasters(currentPage,itemsPerPage);
-    //  futureOrders = fetchOrders() as Future<List<detail>>;
 
+    // Check if currentPage and itemsPerPage are not null
+    if (currentPage != null && itemsPerPage != null) {
+      fetchReturnMasters(currentPage, itemsPerPage);
+    } else {
+      // Handle the case where values are null (e.g., show an error message)
+      print('currentPage or itemsPerPage is null!');
+    }
+
+    //  futureOrders = fetchOrders() as Future<List<detail>>;
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _dateController = TextEditingController();
+  //   fetchReturnMasters(currentPage,itemsPerPage);
+  //   //  futureOrders = fetchOrders() as Future<List<detail>>;
+  //
+  // }
   int itemsPerPage = 10;
   int totalItems = 0;
   int totalPages = 0;
@@ -179,77 +194,62 @@ class _ReturnpageState extends State<Returnpage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: const Color(0xFFF0F4F8),
         appBar:
         AppBar(
-          automaticallyImplyLeading: false,
-          leading: null,
-          backgroundColor: const Color(0xFFFFFFFF),
-          title: Image.asset("images/Final-Ikyam-Logo.png"),
-          // Set background color to white
-          elevation: 2.0,
-          shadowColor: const Color(0xFFFFFFFF),
-          // Set shadow color to black
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: IconButton(
-                  icon: const Icon(Icons.notifications),
-                  onPressed: () {
-                    // Handle notification icon press
-                  },
-                ),
-              ),
-            ),
-            const SizedBox(width: 10,),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 35),
-                  child: PopupMenuButton<String>(
-                    icon: const Icon(Icons.account_circle),
-                    onSelected: (value) {
-                      if (value == 'logout') {
-                        context.go('/');
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                            const LoginScr(
-                            ),
-                            transitionDuration:
-                            const Duration(milliseconds: 200),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ),
-                        );
-                      }
+            automaticallyImplyLeading: false,
+            leading: null,
+            elevation: 2.0,
+
+            backgroundColor: const Color(0xFFFFFFFF),
+            title: Image.asset("images/Final-Ikyam-Logo.png"),
+
+            // Set background color to white
+
+            shadowColor: const Color(0xFFAAAAAA),
+            // Set shadow color to black
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: IconButton(
+                    icon: const Icon(Icons.notifications),
+                    onPressed: () {
+                      // Handle notification icon press
                     },
-                    itemBuilder: (BuildContext context) {
-                      return [
-                        const PopupMenuItem<String>(
-                          value: 'logout',
-                          child: Text('Logout'),
-                        ),
-                      ];
-                    },
-                    offset: const Offset(0, 40), // Adjust the offset to display the menu below the icon
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
+              const SizedBox(width: 10,),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 35),
+                    child: PopupMenuButton<String>(
+                      icon: const Icon(Icons.account_circle),
+                      onSelected: (value) {
+                        if (value == 'logout') {
+                          context.go('/');
+                        }
+                      },
+                      itemBuilder: (BuildContext context) {
+                        return [
+                          const PopupMenuItem<String>(
+                            value: 'logout',
+                            child: Text('Logout'),
+                          ),
+                        ];
+                      },
+                      offset: const Offset(0, 40), // Adjust the offset to display the menu below the icon
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         body: LayoutBuilder(
             builder: (context,constraints) {
               double maxWidth = constraints.maxWidth;
@@ -424,16 +424,27 @@ class _ReturnpageState extends State<Returnpage> {
                         ),
                       ),
                     ),
+              Padding(
+                padding: const EdgeInsets.only(left: 200,top: 0),
+                child: Container(
+                  width: 1, // Set the width to 1 for a vertical line
+                  height: 800, // Set the height to your liking
+                  decoration: BoxDecoration(
+                    border: Border(left: BorderSide(width: 1, color: Colors.grey)),
+                  ),
+                ),
+              ),
                     Positioned(
                       top: 0,
                       left: 0,
                       right: 0,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 200),
+                        padding: const EdgeInsets.only(left: 201),
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
-                          color: Colors.white,
-                          height: 60,
+                          color:
+             Colors.white,
+              height: 50,
                           child: Row(
                             children: [
                               const Padding(
@@ -496,19 +507,20 @@ class _ReturnpageState extends State<Returnpage> {
                                   ),
                                 ),
                               ),
+
                             ],
                           ),
                         ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 43, left: 200),
+                      padding: const EdgeInsets.only(top: 40, left: 200),
                       child: Container(
                         margin: const EdgeInsets.symmetric(
                             vertical: 10),
                         // Space above/below the border
-                        height: 3, // Border height
-                        color: Colors.grey[100], // Border color
+                        height: 0.3, // Border height
+                        color: Colors.black, // Border color
                       ),
                     ),
                     Padding(
@@ -518,15 +530,15 @@ class _ReturnpageState extends State<Returnpage> {
                         width: maxWidth,
                         height: 800,
                         decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(1),
+                          borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.blue
-                                  .withOpacity(0.2), // Light blue shadow
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
+                              color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                              spreadRadius: 1,
+                              blurRadius: 3,
+                              offset: const Offset(0, 1),
                             ),
                           ],
                         ),
@@ -594,16 +606,19 @@ class _ReturnpageState extends State<Returnpage> {
                           maxWidth: constraints.maxWidth * 0.27, // 80% of screen width
                         ),
                         child: Container(
+                          width: 374,
+                          height: 39,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(4),
-                            border: Border.all(color: Colors.blue[100]!),
+                            border: Border.all(color: Color(0xFFA6A6A6),width: 1),
                           ),
                           child: TextFormField(
-                            decoration: const InputDecoration(
+                            decoration:  InputDecoration(
                               hintText: 'Search',
+                           //   icon: Container(),
                               contentPadding: EdgeInsets.all(8),
-                              border: OutlineInputBorder(),
+                             border: InputBorder.none,
                               suffixIcon: Icon(Icons.search_outlined),
                             ),
                             onChanged: _updateSearch,
@@ -627,6 +642,7 @@ class _ReturnpageState extends State<Returnpage> {
                               maxWidth: constraints.maxWidth * 0.13, // 40% of screen width
                             ),
                             child: Container(
+                              height: 35,
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(2),
@@ -635,11 +651,10 @@ class _ReturnpageState extends State<Returnpage> {
                                 child:
                                 DropdownButtonFormField<String>(
                                   decoration: const InputDecoration(
-                                    contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                                    contentPadding: EdgeInsets.symmetric(horizontal: 5,vertical: 8),
                                     border: InputBorder.none,
                                     filled: true,
                                     fillColor: Colors.white,
-                                    hintText: 'Category',
                                   ),
                                   icon: const Padding(
                                     padding: EdgeInsets.only(right: 25),

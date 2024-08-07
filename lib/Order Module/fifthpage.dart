@@ -359,24 +359,7 @@ class _FifthPageState extends State<FifthPage> {
                       icon: const Icon(Icons.account_circle),
                       onSelected: (value) {
                         if (value == 'logout') {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                              const LoginScr(
-                              ),
-                              transitionDuration:
-                              const Duration(milliseconds: 200),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
+
                         }
                       },
                       itemBuilder: (BuildContext context) {

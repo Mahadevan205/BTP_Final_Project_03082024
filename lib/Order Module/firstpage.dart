@@ -15,7 +15,9 @@ import '../screen/dashboard.dart';
 import '../screen/login.dart';
 import '../widgets/mycustomscrollbehavior.dart';
 
-
+void main(){
+  runApp(Orderspage());
+}
 
 
 class Orderspage extends StatefulWidget {
@@ -171,7 +173,7 @@ class _OrderspageState extends State<Orderspage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: const Color(0xFFF0F4F8),
         appBar:
         AppBar(
           backgroundColor: const Color(0xFFFFFFFF),
@@ -205,24 +207,6 @@ class _OrderspageState extends State<Orderspage> {
                     onSelected: (value) {
                       if (value == 'logout') {
                         context.go('/');
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                            const LoginScr(
-                            ),
-                            transitionDuration:
-                            const Duration(milliseconds: 200),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ),
-                        );
                       }
                     },
                     itemBuilder: (BuildContext context) {
@@ -433,16 +417,26 @@ class _OrderspageState extends State<Orderspage> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 200,top: 0),
+                      child: Container(
+                        width: 1, // Set the width to 1 for a vertical line
+                        height: 800, // Set the height to your liking
+                        decoration: BoxDecoration(
+                          border: Border(left: BorderSide(width: 1, color: Colors.grey)),
+                        ),
+                      ),
+                    ),
                     Positioned(
                       top: 0,
                       left: 0,
                       right: 0,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 200),
+                        padding: const EdgeInsets.only(left: 201),
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           color: Colors.white,
-                          height: 60,
+                          height: 50,
                           child: Row(
                             children: [
                               const Padding(
@@ -514,13 +508,13 @@ class _OrderspageState extends State<Orderspage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 43, left: 200),
+                      padding: const EdgeInsets.only(top: 40, left: 200),
                       child: Container(
                         margin: const EdgeInsets.symmetric(
                             vertical: 10),
                         // Space above/below the border
-                        height: 3, // Border height
-                        color: Colors.grey[100], // Border color
+                        height: 0.3, // Border height
+                        color: Colors.black, // Border color
                       ),
                     ),
                     Padding(
@@ -530,15 +524,15 @@ class _OrderspageState extends State<Orderspage> {
                         width: maxWidth,
                         height: 800,
                         decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(1),
+                          borderRadius: BorderRadius.circular(8),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.blue
-                                  .withOpacity(0.2), // Light blue shadow
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
+                              color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                              spreadRadius: 1,
+                              blurRadius: 3,
+                              offset: const Offset(0, 1),
                             ),
                           ],
                         ),

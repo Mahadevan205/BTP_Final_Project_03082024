@@ -140,7 +140,7 @@ class _SidebarState extends State<Sidebar> {
       child: Column(
         children: [
           Container(
-            color: _selectedIndex == 0 ? Colors.grey[300] : Colors.transparent,
+            color: _selectedIndex == 0 ? Colors.red[300] : Colors.transparent,
             child: ListTile(
               leading: Icon(Icons.home),
               title: Text('Home'),

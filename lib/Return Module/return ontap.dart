@@ -11,6 +11,13 @@ import '../Order Module/firstpage.dart';
 import 'package:http/http.dart' as http;
 
 
+void main(){
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+      home: ReturnView(returnMaster: ReturnMaster(reason: '',returnDate: '',returnId: '',email: '',contactPerson: '',items: [],invoiceNumber: '',status: '',notes: '',totalCredit: 0),)));
+}
+
+
 
 
 class ReturnView extends StatefulWidget {
@@ -120,7 +127,7 @@ class _ReturnViewState extends State<ReturnView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF0F4F8),
       appBar:
       AppBar(
         automaticallyImplyLeading: false,
@@ -156,24 +163,6 @@ class _ReturnViewState extends State<ReturnView> {
                   onSelected: (value) {
                     if (value == 'logout') {
                       context.go('/');
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                          const LoginScr(
-                          ),
-                          transitionDuration:
-                          const Duration(milliseconds: 200),
-                          transitionsBuilder: (context, animation,
-                              secondaryAnimation, child) {
-                            return FadeTransition(
-                              opacity: animation,
-                              child: child,
-                            );
-                          },
-                        ),
-                      );
                     }
                   },
                   itemBuilder: (BuildContext context) {
@@ -367,8 +356,18 @@ class _ReturnViewState extends State<ReturnView> {
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 200,top: 0),
+                  child: Container(
+                    width: 1, // Set the width to 1 for a vertical line
+                    height: 900, // Set the height to your liking
+                    decoration: BoxDecoration(
+                      border: Border(left: BorderSide(width: 1, color: Colors.grey)),
+                    ),
+                  ),
+                ),
                 Positioned(
-                    left: 200,
+                    left: 201,
                     right: 0,
                     top: 0,
                     bottom: 0,
@@ -379,14 +378,14 @@ class _ReturnViewState extends State<ReturnView> {
                           Container(
                             padding: const EdgeInsets.symmetric(horizontal: 16),
                             color: Colors.white,
-                            height: 40,
+                            height: 60,
                             child: Row(
                               children: [
                                 IconButton(
                                   icon:
                                   const Icon(Icons.arrow_back), // Back button icon
                                   onPressed: () {
-                                    context.go('/dashboard/return/:return');
+                                    context.go('/return-view/Return');
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -409,15 +408,12 @@ class _ReturnViewState extends State<ReturnView> {
                               ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 0, left: 0),
-                            child: Container(
-                              margin: const EdgeInsets.symmetric(
-                                  vertical: 5),
-                              // Space above/below the border
-                              height: 3, // Border height
-                              color: Colors.grey[100], // Border color
-                            ),
+                          Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 1),
+                            // Space above/below the border
+                            height: 0.3, // Border height
+                            color: Colors.black, // Border color
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right:100),
@@ -468,7 +464,7 @@ class _ReturnViewState extends State<ReturnView> {
                                                   ),
                                                 ),
                                                 hintText: '        Select Date',
-                                                fillColor: Colors.grey.shade200,
+                                                fillColor: Colors.white,
                                                 contentPadding: const EdgeInsets.symmetric(
                                                     horizontal: 8, vertical: 8),
                                                 border: InputBorder.none,
@@ -491,7 +487,7 @@ class _ReturnViewState extends State<ReturnView> {
                             padding: const EdgeInsets.only(left: 50,right: 100,top: 50),
                             child: Container(
                               decoration: BoxDecoration(
-                                border: Border.all(color: const Color(0xFFB2C2D3), width: 2),
+                                border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: const [
                                   BoxShadow(
@@ -513,7 +509,14 @@ class _ReturnViewState extends State<ReturnView> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Text('Invoice Number'),
+                                              const Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text('Invoice Number'),
+                                                  SizedBox(width: 5,),
+                                                  Text('*', style: TextStyle(color: Colors.red),),
+                                                ],
+                                              ),
                                               const SizedBox(height: 5,),
                                               SizedBox(
                                                 height: 40,
@@ -542,7 +545,14 @@ class _ReturnViewState extends State<ReturnView> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Text('Reason'),
+                                              const Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text('Reason'),
+                                                  SizedBox(width: 5,),
+                                                  Text('*', style: TextStyle(color: Colors.red),),
+                                                ],
+                                              ),
                                               const SizedBox(height: 5,),
                                               SizedBox(
                                                 height: 40,
@@ -599,7 +609,14 @@ class _ReturnViewState extends State<ReturnView> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Text('Contact Person'),
+                                              const Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text('Contact Person'),
+                                                  SizedBox(width: 5,),
+                                                  Text('*', style: TextStyle(color: Colors.red),),
+                                                ],
+                                              ),
                                               const SizedBox(height: 5,),
                                               SizedBox(
                                                 height: 40,
@@ -626,7 +643,14 @@ class _ReturnViewState extends State<ReturnView> {
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
-                                              const Text('Email'),
+                                              const Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Text('Email'),
+                                                  SizedBox(width: 5,),
+                                                  Text('*', style: TextStyle(color: Colors.red),),
+                                                ],
+                                              ),
                                               const SizedBox(height: 5,),
                                               SizedBox(
                                                 height: 40,
@@ -662,7 +686,7 @@ class _ReturnViewState extends State<ReturnView> {
                             child: Container(
                               decoration: BoxDecoration(
                                 color: const Color(0xFFFFFFFF),
-                                border: Border.all(color: const Color(0xFFB2C2D3), width: 2),
+                                border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(8),
                                 boxShadow: const [
                                   BoxShadow(
@@ -690,9 +714,9 @@ class _ReturnViewState extends State<ReturnView> {
                                   Container(
                                     width: maxWidth,
                                     decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: const Color(0xFFB2C2D3),
-                                        width: 1.2,
+                                      border: Border(
+                                        top: BorderSide(color: const Color(0xFFB2C2D3), width: 1.2),
+                                        bottom: BorderSide(color: const Color(0xFFB2C2D3), width: 1.2),
                                       ),
                                     ),
                                     child: Padding(
@@ -1061,7 +1085,7 @@ class _ReturnViewState extends State<ReturnView> {
                                     blurRadius: 6,
                                   ),
                                 ],
-                                border: Border.all(color: const Color(0xFFB2C2D3), width: 2),
+                                border: Border.all(color:  Colors.grey, ),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Column(
@@ -1119,7 +1143,7 @@ class _ReturnViewState extends State<ReturnView> {
                                     blurRadius: 6,
                                   ),
                                 ],
-                                border: Border.all(color: const Color(0xFFB2C2D3), width: 2),
+                                border: Border.all(color: Colors.grey),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),

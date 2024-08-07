@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'package:btb/Order%20Module/add%20productmaster%20sample.dart';
 import 'package:btb/Order%20Module/eighthpage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +13,7 @@ import '../Return Module/return first page.dart';
 import '../screen/login.dart';
 import '../screen/dashboard.dart';
 import 'firstpage.dart';
+
 
 
 
@@ -658,7 +660,7 @@ class _SixthPageState extends State<SixthPage> {
       ],
     );
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color(0xFFF0F4F8),
         appBar: AppBar(
           automaticallyImplyLeading: false,
           leading: null,
@@ -689,24 +691,6 @@ class _SixthPageState extends State<SixthPage> {
                     onSelected: (value) {
                       if (value == 'logout') {
                         context.go('/');
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder:
-                                (context, animation, secondaryAnimation) =>
-                            const LoginScr(
-                            ),
-                            transitionDuration:
-                            const Duration(milliseconds: 200),
-                            transitionsBuilder: (context, animation,
-                                secondaryAnimation, child) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ),
-                        );
                       }
                     },
                     itemBuilder: (BuildContext context) {
@@ -918,18 +902,28 @@ class _SixthPageState extends State<SixthPage> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 200,top: 0),
+                      child: Container(
+                        width: 1.8, // Set the width to 1 for a vertical line
+                        height: maxHeight, // Set the height to your liking
+                        decoration: BoxDecoration(
+                          border: Border(left: BorderSide(width: 1, color: Colors.grey)),
+                        ),
+                      ),
+                    ),
                     Positioned(
                       top: 0,
                       left: 0,
                       right: 0,
                       child: Padding(
                         padding: const EdgeInsets.only(
-                          left: 200,
+                          left: 201,
                         ),
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           color: Colors.white,
-                          height: 50,
+                          height: 60,
                           child: Row(
                             children: [
                               IconButton(
@@ -994,27 +988,27 @@ class _SixthPageState extends State<SixthPage> {
                                     print(data);
                                     context.go('/Edit_Order', extra: data);
                                     Map<String, dynamic> orderDetailsMap = widget.orderDetails!.map((e) => e.toJson()).toList().asMap().cast<String, String>();
-                                    Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (context, animation,
-                                            secondaryAnimation) =>
-                                            SelectedProductPage(
-                                              data: data,
-                                              selectedProducts: const [],
-                                              orderDetails: orderDetailsMap,
-                                            ),
-                                        transitionDuration:
-                                        const Duration(milliseconds: 200),
-                                        transitionsBuilder: (context, animation,
-                                            secondaryAnimation, child) {
-                                          return FadeTransition(
-                                            opacity: animation,
-                                            child: child,
-                                          );
-                                        },
-                                      ),
-                                    );
+                                    // Navigator.push(
+                                    //   context,
+                                    //   PageRouteBuilder(
+                                    //     pageBuilder: (context, animation,
+                                    //         secondaryAnimation) =>
+                                    //         SelectedProductPage(
+                                    //           data: data,
+                                    //           selectedProducts: const [],
+                                    //           orderDetails: orderDetailsMap,
+                                    //         ),
+                                    //     transitionDuration:
+                                    //     const Duration(milliseconds: 200),
+                                    //     transitionsBuilder: (context, animation,
+                                    //         secondaryAnimation, child) {
+                                    //       return FadeTransition(
+                                    //         opacity: animation,
+                                    //         child: child,
+                                    //       );
+                                    //     },
+                                    //   ),
+                                    // );
                                   },
                                   style: OutlinedButton.styleFrom(
                                     backgroundColor:
@@ -1074,33 +1068,33 @@ class _SixthPageState extends State<SixthPage> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 0, left: 495),
+                      padding: const EdgeInsets.only(top: 0, left: 490),
                       child: Container(
                         margin: const EdgeInsets.symmetric(
                             horizontal: 10), // Space above/below the border
                         height: 1200,
                         // width: 1500,
-                        width: 2,// Border height
-                        color: Colors.grey[300], // Border color
+                        width:0.9,// Border height
+                        color: Colors.black, // Border color
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 43, left: 200),
+                      padding: const EdgeInsets.only(top: 49, left: 200),
                       child: Container(
                         margin: const EdgeInsets.symmetric(
                             vertical: 10), // Space above/below the border
-                        height: 2,
+                        height: 0.5,
                         // width: 1500,
                         width: constraints.maxWidth,// Border height
-                        color: Colors.grey[300], // Border color
+                        color: Colors.black, // Border color
                       ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(
                         top: 60,
-                        left:200,
+                        left:201,
                       ),
-                      width: 300,
+                      width: 298,
                       height: 1100,
                       decoration: BoxDecoration(
                         color: const Color(0xFFFFFFFF),
@@ -1113,17 +1107,18 @@ class _SixthPageState extends State<SixthPage> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               SizedBox(
-                                height: 50,
-                                width: 60,
+                                height: 40,
+                                width: 50,
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 15, right: 15, bottom: 5),
+                                      left: 15, right: 15, bottom: 5,top: 5),
                                   child: TextFormField(
                                     //controller: _orderIdController,
                                     // Assign the controller to the TextFormField
                                     decoration: const InputDecoration(
                                       // labelText: 'Order ID',
                                       hintText: 'Search Order',
+                                      hintStyle: TextStyle(color: Colors.grey),
                                       contentPadding: EdgeInsets.all(8),
                                       border: OutlineInputBorder(),
                                       prefixIcon: Icon(Icons.search_outlined),
@@ -1176,7 +1171,7 @@ class _SixthPageState extends State<SixthPage> {
                                         child: AnimatedContainer(
                                           duration: const Duration(milliseconds: 200),
                                           decoration: BoxDecoration(
-                                            color: isSelected ? Colors.lightBlue : Colors.white,
+                                            color: isSelected ? Colors.lightBlue[100] : Colors.white,
                                           ),
                                           child: ListTile(
                                             title: Text('Order ID: ${orderDetail.orderId}'),
@@ -1209,10 +1204,19 @@ class _SixthPageState extends State<SixthPage> {
                       child: Container(
                         height: 100,
                         width: maxWidth,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xFFB2C2D3), width: 2),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
+                          decoration: BoxDecoration(
+                                 color: Color(0xFFFFFFFF), // background: #FFFFFF
+                          boxShadow: [BoxShadow(
+                        offset: Offset(0, 3),
+                          blurRadius: 6,
+                          color: Color(0x29000000), // box-shadow: 0px 3px 6px #00000029
+                  )],
+                border: Border.all(
+                  // border: 2px
+                   color: Color(0xFFB2C2D3), // border: #B2C2D3
+                 ),
+                 borderRadius: BorderRadius.all(Radius.circular(8)), // border-radius: 8px
+               ),
                         child: const Padding(
                           padding: EdgeInsets.only(top: 30),
                           child: Row(
@@ -1295,9 +1299,22 @@ class _SixthPageState extends State<SixthPage> {
                       padding: const EdgeInsets.only(left: 550,right: 120,top: 250),
                       child: Container(
                         decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xFFB2C2D3)),
-                          borderRadius: BorderRadius.circular(3.5), // Set border radius here
+                          color: Color(0xFFFFFFFF), // background: #FFFFFF
+                          boxShadow: [BoxShadow(
+                            offset: Offset(0, 3),
+                            blurRadius: 6,
+                            color: Color(0x29000000), // box-shadow: 0px 3px 6px #00000029
+                          )],
+                          border: Border.all(
+                            // border: 2px
+                            color: Color(0xFFB2C2D3), // border: #B2C2D3
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(8)), // border-radius: 8px
                         ),
+                        // decoration: BoxDecoration(
+                        //   border: Border.all(color: const Color(0xFFB2C2D3)),
+                        //   borderRadius: BorderRadius.circular(3.5), // Set border radius here
+                        // ),
                         child: Table(
                           border: TableBorder.all(color: const Color(0xFFB2C2D3)),
 
@@ -1314,16 +1331,29 @@ class _SixthPageState extends State<SixthPage> {
                       ),
                     ),
                     Padding(
-                      padding:  const EdgeInsets.only(left: 550, top: 700,right: 120),
+                      padding:  const EdgeInsets.only(left: 550, top: 650,right: 120),
                       child: Container(
                         // height: 150,
                         width: maxWidth,
                         //   padding: const EdgeInsets.all(0.0),
                         decoration: BoxDecoration(
-                          border: Border.all(color: const Color(0xFFB2C2D3), width:
-                          2),
-                          borderRadius: BorderRadius.circular(5.0),
+                          color: Color(0xFFFFFFFF), // background: #FFFFFF
+                          boxShadow: [BoxShadow(
+                            offset: Offset(0, 3),
+                            blurRadius: 6,
+                            color: Color(0x29000000), // box-shadow: 0px 3px 6px #00000029
+                          )],
+                          border: Border.all(
+                            // border: 2px
+                            color: Color(0xFFB2C2D3), // border: #B2C2D3
+                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(8)), // border-radius: 8px
                         ),
+                        // decoration: BoxDecoration(
+                        //   border: Border.all(color: const Color(0xFFB2C2D3), width:
+                        //   2),
+                        //   borderRadius: BorderRadius.circular(5.0),
+                        // ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

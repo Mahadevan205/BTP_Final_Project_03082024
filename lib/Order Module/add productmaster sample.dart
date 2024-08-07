@@ -856,7 +856,7 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          backgroundColor: const Color(0xFFFFFFFF),
+          backgroundColor: const Color(0xFFF0F4F8),
           appBar:
           AppBar(
             leading: null,
@@ -892,24 +892,6 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                       onSelected: (value) {
                         if (value == 'logout') {
                           context.go('/');
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation, secondaryAnimation) =>
-                              const LoginScr(
-                              ),
-                              transitionDuration:
-                              const Duration(milliseconds: 200),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return FadeTransition(
-                                  opacity: animation,
-                                  child: child,
-                                );
-                              },
-                            ),
-                          );
                         }
                       },
                       itemBuilder: (BuildContext context) {
@@ -1099,8 +1081,18 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 200,top: 0),
+                      child: Container(
+                        width: 1.8, // Set the width to 1 for a vertical line
+                        height: maxHeight, // Set the height to your liking
+                        decoration: BoxDecoration(
+                          border: Border(left: BorderSide(width: 1, color: Colors.grey)),
+                        ),
+                      ),
+                    ),
                     Positioned(
-                      left: 200,
+                      left: 201,
                       right: 0,
                       top: 0,
                       bottom: 0,
@@ -1182,11 +1174,11 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                               padding: const EdgeInsets.only(top: 0, left: 0),
                               child: Container(
                                 margin: const EdgeInsets.symmetric(
-                                    vertical: 5), // Space above/below the border
-                                height: 2,
+                                    vertical: 2), // Space above/below the border
+                                height: 0.5,
                                 // width: 1000,
                                 width: constraints.maxWidth,// Border height
-                                color: Colors.grey[300], // Border color
+                                color: Colors.black, // Border color
                               ),
                             ),
                             //date
@@ -1252,7 +1244,7 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                                                       ),
                                                     ),
                                                     hintText: '        Select Date',
-                                                    fillColor: Colors.grey.shade200,
+                                                    fillColor: Colors.white,
                                                     contentPadding: const EdgeInsets.symmetric(
                                                         horizontal: 8, vertical: 8),
                                                     border: InputBorder.none,
@@ -1272,11 +1264,20 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 150,right: 100,top: 100),
+                              padding: const EdgeInsets.only(left: 80,right: 100,top: 40),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: const Color(0xFFB2C2D3)),
-                                  borderRadius: BorderRadius.circular(3.5), // Set border radius here
+                                  color: Color(0xFFFFFFFF), // background: #FFFFFF
+                                  boxShadow: [BoxShadow(
+                                    offset: Offset(0, 3),
+                                    blurRadius: 6,
+                                    color: Color(0x29000000), // box-shadow: 0px 3px 6px #00000029
+                                  )],
+                                  border: Border.all(
+                                    // border: 2px
+                                    color: Color(0xFFB2C2D3), // border: #B2C2D3
+                                  ),
+                                  borderRadius: BorderRadius.all(Radius.circular(8)), // border-radius: 8px
                                 ),
                                 child: Table(
                                   border: TableBorder.all(color: const Color(0xFFB2C2D3)),
@@ -1296,15 +1297,24 @@ class _SelectedProductPageState extends State<SelectedProductPage> {
                             buildDataTable(),
                             Padding(
                               padding: const EdgeInsets.only
-                                (top:100, left:150, right: 100,bottom: 25),
+                                (top:100, left:80, right: 100,bottom: 25),
                               child: SizedBox(
                                 width: maxWidth*0.785,
                                 child: Container(
                                   width: maxWidth,
                                   padding: const EdgeInsets.all(0.0),
                                   decoration: BoxDecoration(
-                                    border: Border.all(color: const Color(0xFFB2C2D3),width:2),
-                                    borderRadius: BorderRadius.circular(5.0),
+                                    color: Color(0xFFFFFFFF), // background: #FFFFFF
+                                    boxShadow: [BoxShadow(
+                                      offset: Offset(0, 3),
+                                      blurRadius: 6,
+                                      color: Color(0x29000000), // box-shadow: 0px 3px 6px #00000029
+                                    )],
+                                    border: Border.all(
+                                      // border: 2px
+                                      color: Color(0xFFB2C2D3), // border: #B2C2D3
+                                    ),
+                                    borderRadius: BorderRadius.all(Radius.circular(8)), // border-radius: 8px
                                   ),
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,

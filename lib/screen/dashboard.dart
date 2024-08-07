@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:html';
-import 'package:btb/Return%20Module/return%20first%20page.dart';
 import 'package:btb/widgets/pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -9,9 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:btb/widgets/productclass.dart';
 import '../../screen/login.dart';
-import '../Order Module/firstpage.dart';
-import '../Product Module/Create Product.dart';
-import '../Product Module/Product Screen.dart';
 
 
 class DashboardPage extends StatefulWidget {
@@ -231,7 +227,7 @@ class _DashboardPageState extends State<DashboardPage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-          backgroundColor: const Color(0xFFFFFFFF),
+          backgroundColor: const Color(0xFFF0F4F8),
           appBar:
           AppBar(
             leading: null,
@@ -263,47 +259,34 @@ class _DashboardPageState extends State<DashboardPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 35),
 
-                      child: WillPopScope(
-                              onWillPop: () async {
+                    child: WillPopScope(
+                      onWillPop: () async {
                         // Prevent the popup from appearing when navigating back
                         return false;
                       },
 
-                         child:  PopupMenuButton<String>(
-                  icon: const Icon(Icons.account_circle),
-                  onSelected: (value) {
-                    if (!_hasShownPopup) {
-                      _hasShownPopup = true;
-                      if (value == 'logout') {
-                        window.sessionStorage.remove('token');
-                        context.go('/');
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            pageBuilder: (context, animation, secondaryAnimation) => const LoginScr(),
-                            transitionDuration: const Duration(milliseconds: 50),
-                            transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                              return FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              );
-                            },
-                          ),
-                        );
-                      }
-                    }
-                  },
-                  itemBuilder: (BuildContext context) {
-                    return [
-                      const PopupMenuItem<String>(
-                        value: 'logout',
-                        child: Text('Logout'),
+                      child:  PopupMenuButton<String>(
+                        icon: const Icon(Icons.account_circle),
+                        onSelected: (value) {
+                          if (!_hasShownPopup) {
+                            _hasShownPopup = true;
+                            if (value == 'logout') {
+                              window.sessionStorage.remove('token');
+                              context.go('/');
+                            }
+                          }
+                        },
+                        itemBuilder: (BuildContext context) {
+                          return [
+                            const PopupMenuItem<String>(
+                              value: 'logout',
+                              child: Text('Logout'),
+                            ),
+                          ];
+                        },
+                        offset: const Offset(0, 40), // Adjust the offset to display the menu below the icon
                       ),
-                    ];
-                  },
-                  offset: const Offset(0, 40), // Adjust the offset to display the menu below the icon
-                ),
-                      ),
+                    ),
 
                   ),
                 ),
@@ -348,18 +331,18 @@ class _DashboardPageState extends State<DashboardPage> {
                               onPressed: () {
 
                                 context.go('/Products');
-                             //    Navigator.of(context).push(
-                             //      PageRouteBuilder(
-                             //        pageBuilder: (context, animation, secondaryAnimation) =>
-                             //            ProductPage(
-                             //              product: null,
-                             //            ),
-                             //      ),
-                             //
-                             //    );
-                             //    GoRouter.of(context).go('/Home/Products', extra: (context) {
-                             //         return ProductPage(product: null);
-                             //       });
+                                //    Navigator.of(context).push(
+                                //      PageRouteBuilder(
+                                //        pageBuilder: (context, animation, secondaryAnimation) =>
+                                //            ProductPage(
+                                //              product: null,
+                                //            ),
+                                //      ),
+                                //
+                                //    );
+                                //    GoRouter.of(context).go('/Home/Products', extra: (context) {
+                                //         return ProductPage(product: null);
+                                //       });
 
                                 // Navigator.of(context).push(
                                 //   MaterialPageRoute(
@@ -394,27 +377,27 @@ class _DashboardPageState extends State<DashboardPage> {
                               Icon(Icons.image_outlined, color: Colors.indigo[900]),
                               label: Text(
                                 'Products',
-                                  style: TextStyle(color: Colors.indigo[900],fontSize: 18),
+                                style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
                             TextButton.icon(
                               onPressed: () {
                                 context.go('/Orders');
-                               // Navigator.pushNamed(context, '/:Orders');
-                              //   context.go('/:Orders');
-                              // //  context.go('/dasbaord/Orderspage');
-                              //   Navigator.of(context).push(PageRouteBuilder(
-                              //     pageBuilder: (context, animation,
-                              //         secondaryAnimation) =>
-                              //         Orderspage(),
-                              //   ));
+                                // Navigator.pushNamed(context, '/:Orders');
+                                //   context.go('/:Orders');
+                                // //  context.go('/dasbaord/Orderspage');
+                                //   Navigator.of(context).push(PageRouteBuilder(
+                                //     pageBuilder: (context, animation,
+                                //         secondaryAnimation) =>
+                                //         Orderspage(),
+                                //   ));
                               },
                               icon: Icon(Icons.warehouse_outlined,
                                   color: Colors.indigo[900]),
                               label: Text(
                                 'Orders',
-                                  style: TextStyle(color: Colors.indigo[900],fontSize: 18),
+                                style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -425,7 +408,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                   color: Colors.blue[900]),
                               label: Text(
                                 'Delivery',
-                                  style: TextStyle(color: Colors.indigo[900],fontSize: 18),
+                                style: TextStyle(color: Colors.indigo[900],fontSize: 18),
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -454,24 +437,24 @@ class _DashboardPageState extends State<DashboardPage> {
                             TextButton.icon(
                               onPressed: () {
                                 context.go('/Home/Return');
-                               // context.go('/dashboard/return/:return');
-                               //  Navigator.push(
-                               //    context,
-                               //    PageRouteBuilder(
-                               //      pageBuilder:
-                               //          (context, animation, secondaryAnimation) =>
-                               //      const Returnpage(),
-                               //      transitionDuration:
-                               //      const Duration(milliseconds: 50),
-                               //      transitionsBuilder: (context, animation,
-                               //          secondaryAnimation, child) {
-                               //        return FadeTransition(
-                               //          opacity: animation,
-                               //          child: child,
-                               //        );
-                               //      },
-                               //    ),
-                               //  );
+                                // context.go('/dashboard/return/:return');
+                                //  Navigator.push(
+                                //    context,
+                                //    PageRouteBuilder(
+                                //      pageBuilder:
+                                //          (context, animation, secondaryAnimation) =>
+                                //      const Returnpage(),
+                                //      transitionDuration:
+                                //      const Duration(milliseconds: 50),
+                                //      transitionsBuilder: (context, animation,
+                                //          secondaryAnimation, child) {
+                                //        return FadeTransition(
+                                //          opacity: animation,
+                                //          child: child,
+                                //        );
+                                //      },
+                                //    ),
+                                //  );
                               },
                               icon:
                               Icon(Icons.backspace_sharp, color: Colors.blue[900]),
@@ -493,6 +476,15 @@ class _DashboardPageState extends State<DashboardPage> {
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only( left: 192),
+                      child: Container(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 10), // Space above/below the border
+                        width: 1, // Border height
+                        color: Colors.grey, // Border color
+                      ),
+                    ),
                     Positioned(
                       left: 100,
                       top: 0,
@@ -502,20 +494,19 @@ class _DashboardPageState extends State<DashboardPage> {
                         child: Column(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 100),
+                              padding: const EdgeInsets.only(left: 103),
                               child: Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                                color: Colors.white,
+                                color: Color(0xFFFFFDFF),
                                 height: 60,
                                 child: Row(
                                   children: [
                                     const Padding(
-                                      padding: EdgeInsets.only(left: 0),
+                                      padding: EdgeInsets.only(left: 10),
                                       child: Text(
                                         'Dashboard',
                                         style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25,
                                         ),
                                         textAlign: TextAlign.center,
                                       ),
@@ -546,7 +537,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                         },
                                         style: OutlinedButton.styleFrom(
                                           backgroundColor:
-                                          Colors.blueAccent, // Button background color
+                                          Colors.indigo, // Button background color
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                             BorderRadius.circular(5), // Rounded corners
@@ -556,8 +547,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                         child: const Text(
                                           'Create',
                                           style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16,
                                             color: Colors.white,
                                           ),
                                         ),
@@ -568,76 +558,64 @@ class _DashboardPageState extends State<DashboardPage> {
                               ),
                             ),
                             Container(
-                              margin: const EdgeInsets.only(left: 100), // Space above/below the border
-                              height: 2,
+                              margin: const EdgeInsets.only(left: 103), // Space above/below the border
+                              height: 1,
                               // width: 1000,
                               width: constraints.maxWidth,// Border height
-                              color: Colors.grey[300], // Border color
+                              color: Colors.grey, // Border color
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(top:30,right: 100),
-                                  child: DecoratedBox(
+                                  child: Container(
+                                    height: 39,
+                                    width: maxWidth *0.11,
                                     decoration: BoxDecoration(
-                                      border: Border.all(
-                                          color: const Color(0xFFEBF3FF), width: 1),
-                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(color: Colors.grey),
+                                      borderRadius: BorderRadius.circular(4),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: const Color(0xFF418CFC)
-                                              .withOpacity(0.16), // 0.2 * 0.8 = 0.16
-                                          spreadRadius: 0,
-                                          blurRadius: 6,
-                                          offset: const Offset(0, 3),
+                                          color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                                          spreadRadius: 1,
+                                          blurRadius: 3,
+                                          offset: const Offset(0, 1),
                                         ),
                                       ],
                                     ),
-                                    child: Container(
-                                      height: 39,
-                                      width: maxWidth *0.13,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white
-                                            .withOpacity(1), // Opacity is 1, fully opaque
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: TextFormField(
-                                              controller: _dateController,
-                                              // Replace with your TextEditingController
-                                              readOnly: true,
-                                              decoration: InputDecoration(
-                                                suffixIcon: Padding(
-                                                  padding: const EdgeInsets.only(right: 20),
-                                                  child: Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 2, left: 10),
-                                                    child: IconButton(
-                                                      icon: const Padding(
-                                                        padding: EdgeInsets.only(bottom: 16),
-                                                        child: Icon(Icons.calendar_month),
-                                                      ),
-                                                      iconSize: 20,
-                                                      onPressed: () {
-                                                        //  _showDatePicker(context);
-                                                      },
-                                                    ),
+                                    child: Column(
+                                      children: [
+                                        Expanded(
+                                          child: TextFormField(
+                                            controller:_dateController,
+                                            // Replace with your TextEditingController
+                                            readOnly: true,
+                                            decoration: InputDecoration(
+                                              suffixIcon: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 2,right: 10),
+                                                child: IconButton(
+                                                  icon: const Padding(
+                                                    padding: EdgeInsets.only(bottom: 16,),
+                                                    child: Icon(Icons.calendar_month,color: Colors.black,),
                                                   ),
+                                                  iconSize: 20,
+                                                  onPressed: () {
+                                                    //  _showDatePicker(context);
+                                                  },
                                                 ),
-                                                hintText: '  Select Date',
-                                                fillColor: Colors.white,
-                                                contentPadding: const EdgeInsets.symmetric(
-                                                    horizontal: 8, vertical: 8),
-                                                border: InputBorder.none,
-                                                filled: true,
                                               ),
+                                              //    hintText: '      Select Date',
+                                              fillColor: Colors.white,
+                                              contentPadding: const EdgeInsets.symmetric(
+                                                  horizontal: 4, vertical: 4),
+                                              border: InputBorder.none,
+                                              filled: true,
                                             ),
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
@@ -656,6 +634,7 @@ class _DashboardPageState extends State<DashboardPage> {
                                             return Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                               children: [
+
                                                 Card(
                                                   margin:  const EdgeInsets.only(left: 1, top: 20,),
                                                   shape: RoundedRectangleBorder(
@@ -668,17 +647,30 @@ class _DashboardPageState extends State<DashboardPage> {
                                                     width: maxWidth * 0.15,
                                                     padding: const EdgeInsets.all(16),
                                                     decoration: BoxDecoration(
+                                                      border: Border.all(color: Colors.grey),
                                                       color: Colors.white,
-                                                      borderRadius: BorderRadius.circular(10),
+                                                      borderRadius: BorderRadius.circular(8),
                                                       boxShadow: [
                                                         BoxShadow(
-                                                          color: Colors.blue.withOpacity(0.1),
-                                                          spreadRadius: 3,
-                                                          blurRadius: 7,
-                                                          offset: const Offset(0, 3),
+                                                          color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                                                          spreadRadius: 1,
+                                                          blurRadius: 3,
+                                                          offset: const Offset(0, 1),
                                                         ),
                                                       ],
                                                     ),
+                                                    // decoration: BoxDecoration(
+                                                    //   color: Colors.white,
+                                                    //   borderRadius: BorderRadius.circular(10),
+                                                    //   boxShadow: [
+                                                    //     BoxShadow(
+                                                    //       color: Colors.blue.withOpacity(0.1),
+                                                    //       spreadRadius: 3,
+                                                    //       blurRadius: 7,
+                                                    //       offset: const Offset(0, 3),
+                                                    //     ),
+                                                    //   ],
+                                                    // ),
                                                     child: Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
@@ -725,17 +717,30 @@ class _DashboardPageState extends State<DashboardPage> {
                                                       width: maxWidth * 0.15,
                                                       padding: const EdgeInsets.all(16),
                                                       decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.grey),
                                                         color: Colors.white,
-                                                        borderRadius: BorderRadius.circular(10),
+                                                        borderRadius: BorderRadius.circular(8),
                                                         boxShadow: [
                                                           BoxShadow(
-                                                            color: Colors.blue.withOpacity(0.1),
-                                                            spreadRadius: 3,
-                                                            blurRadius: 7,
-                                                            offset: const Offset(0, 3),
+                                                            color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                                                            spreadRadius: 1,
+                                                            blurRadius: 3,
+                                                            offset: const Offset(0, 1),
                                                           ),
                                                         ],
                                                       ),
+                                                      // decoration: BoxDecoration(
+                                                      //   color: Colors.white,
+                                                      //   borderRadius: BorderRadius.circular(10),
+                                                      //   boxShadow: [
+                                                      //     BoxShadow(
+                                                      //       color: Colors.blue.withOpacity(0.1),
+                                                      //       spreadRadius: 3,
+                                                      //       blurRadius: 7,
+                                                      //       offset: const Offset(0, 3),
+                                                      //     ),
+                                                      //   ],
+                                                      // ),
                                                       child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
@@ -783,17 +788,30 @@ class _DashboardPageState extends State<DashboardPage> {
                                                       width: maxWidth * 0.15,
                                                       padding: const EdgeInsets.all(16),
                                                       decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.grey),
                                                         color: Colors.white,
-                                                        borderRadius: BorderRadius.circular(10),
+                                                        borderRadius: BorderRadius.circular(8),
                                                         boxShadow: [
                                                           BoxShadow(
-                                                            color: Colors.blue.withOpacity(0.1),
-                                                            spreadRadius: 3,
-                                                            blurRadius: 7,
-                                                            offset: const Offset(0, 3),
+                                                            color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                                                            spreadRadius: 1,
+                                                            blurRadius: 3,
+                                                            offset: const Offset(0, 1),
                                                           ),
                                                         ],
                                                       ),
+                                                      // decoration: BoxDecoration(
+                                                      //   color: Colors.white,
+                                                      //   borderRadius: BorderRadius.circular(10),
+                                                      //   boxShadow: [
+                                                      //     BoxShadow(
+                                                      //       color: Colors.blue.withOpacity(0.1),
+                                                      //       spreadRadius: 3,
+                                                      //       blurRadius: 7,
+                                                      //       offset: const Offset(0, 3),
+                                                      //     ),
+                                                      //   ],
+                                                      // ),
                                                       child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
@@ -841,17 +859,30 @@ class _DashboardPageState extends State<DashboardPage> {
                                                       width: maxWidth * 0.15,
                                                       padding: const EdgeInsets.all(16),
                                                       decoration: BoxDecoration(
+                                                        border: Border.all(color: Colors.grey),
                                                         color: Colors.white,
-                                                        borderRadius: BorderRadius.circular(10),
+                                                        borderRadius: BorderRadius.circular(8),
                                                         boxShadow: [
                                                           BoxShadow(
-                                                            color: Colors.blue.withOpacity(0.1),
-                                                            spreadRadius: 3,
-                                                            blurRadius: 7,
-                                                            offset: const Offset(0, 3),
+                                                            color: Colors.blue.withOpacity(0.1), // Soft grey shadow
+                                                            spreadRadius: 1,
+                                                            blurRadius: 3,
+                                                            offset: const Offset(0, 1),
                                                           ),
                                                         ],
                                                       ),
+                                                      // decoration: BoxDecoration(
+                                                      //   color: Colors.white,
+                                                      //   borderRadius: BorderRadius.circular(10),
+                                                      //   boxShadow: [
+                                                      //     BoxShadow(
+                                                      //       color: Colors.blue.withOpacity(0.1),
+                                                      //       spreadRadius: 3,
+                                                      //       blurRadius: 7,
+                                                      //       offset: const Offset(0, 3),
+                                                      //     ),
+                                                      //   ],
+                                                      // ),
                                                       child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
@@ -898,20 +929,21 @@ class _DashboardPageState extends State<DashboardPage> {
                                           height: 750,
                                           width: maxWidth ,
                                           decoration: BoxDecoration(
+                                            border: Border.all(color: Colors.grey),
                                             color: Colors.white,
-                                            borderRadius: BorderRadius.circular(2),
+                                            borderRadius: BorderRadius.circular(8),
                                             boxShadow: [
                                               BoxShadow(
-                                                color: Colors.grey.withOpacity(0.5),
+                                                color: Colors.blue.withOpacity(0.1), // Soft grey shadow
                                                 spreadRadius: 1,
-                                                blurRadius: 5,
+                                                blurRadius: 3,
                                                 offset: const Offset(0, 1),
                                               ),
                                             ],
                                           ),
                                           child: SizedBox(
 
-                                           //width: maxWidth * 0.8,
+                                            //width: maxWidth * 0.8,
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               children: [
@@ -975,22 +1007,26 @@ class _DashboardPageState extends State<DashboardPage> {
                 children: [
                   const SizedBox(height: 8),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(top:20,left:30),
                     child: Container(
-                      width: maxWidth1 * 0.259,
+                      width: maxWidth1 * 0.255,
+                      height: 40,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(4),
-                        border: Border.all(color: Colors.blue),
+                        border: Border.all(color: Colors.grey),
                       ),
                       child: TextFormField(
                         decoration: const InputDecoration(
                           hintText: 'Search',
                           hintStyle: TextStyle(color: Colors.blueGrey),
-                          contentPadding: EdgeInsets.all(8),
+                          contentPadding: EdgeInsets.symmetric(horizontal: 10,vertical: 6),
                           border: InputBorder.none,
 
-                          suffixIcon: Icon(Icons.search_outlined,color: Colors.blue,),
+                          suffixIcon: Padding(
+                            padding: EdgeInsets.only(right: 20),
+                            child: Icon(Icons.search_outlined,color: Colors.indigo,),
+                          ),
                         ),
                         onChanged: _updateSearch,
                       ),
@@ -1006,24 +1042,25 @@ class _DashboardPageState extends State<DashboardPage> {
                     children: [
                       const SizedBox(height: 8),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.only(left: 30),
                         child: Container(
                           width: maxWidth1 * 0.125,
+                          height: 40,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(2),
-                            border: Border.all(color: Colors.blue),
+                            border: Border.all(color: Colors.grey),
                           ),
                           child: DropdownButtonFormField<String>(
                             decoration: const InputDecoration(
                               contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                              EdgeInsets.symmetric(horizontal: 10,vertical: 6),
                               border: InputBorder.none,
                               filled: true,
                               fillColor: Colors.white,
                               suffixIcon: Padding(
                                 padding: EdgeInsets.only(right: 28),
-                                child: const Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blueAccent,size: 16,),
+                                child: const Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.indigo,size: 16,),
                               ),
                             ),
                             icon: Container(),
@@ -1058,21 +1095,22 @@ class _DashboardPageState extends State<DashboardPage> {
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
                           width: maxWidth1 * 0.125,
+                          height: 40,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(2),
-                            border: Border.all(color: Colors.blue),
+                            border: Border.all(color: Colors.grey),
                           ),
                           child: DropdownButtonFormField<String>(
                             decoration: const InputDecoration(
                               contentPadding:
-                              EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                              EdgeInsets.symmetric(horizontal: 10,vertical: 6),
                               border: InputBorder.none,
                               filled: true,
                               fillColor: Colors.white,
                               suffixIcon: Padding(
                                 padding: EdgeInsets.only(right: 28),
-                                child: const Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.blueAccent,size: 16,),
+                                child: const Icon(Icons.arrow_drop_down_circle_rounded,color: Colors.indigo,size: 16,),
                               ),
                             ),
                             icon: Container(),
@@ -1119,36 +1157,39 @@ class _DashboardPageState extends State<DashboardPage> {
       children: [
         Container(
           width: _mediaQuery * 0.82,
-          color: const Color(0xFFF7F7F7),
+          decoration: const BoxDecoration(
+              color: Color(0xFFF7F7F7),
+              border: Border.symmetric(horizontal: BorderSide(color: Colors.grey,width: 0.5))
+          ),
           child: Padding(
             padding: const EdgeInsets.only(top: 5, bottom: 5),
             child:
             DataTable(
-              headingRowHeight: 40,
+              headingRowHeight: 50,
               columns: [
                 DataColumn(label: Container(
                     child: Padding(
-                      padding: EdgeInsets.only(left: 30),
-                      child: Text('Status',style:TextStyle( color: Colors.indigo[900],   fontSize: 17,
-                        fontWeight: FontWeight.bold,),),
+                      padding: EdgeInsets.only(left: 25),
+                      child: Text('Status',style:TextStyle( color: Colors.indigo[900],   fontSize: 18,
+                      ),),
                     ))),
                 DataColumn(label: Container(child: Padding(
                   padding: const EdgeInsets.only(left: 5),
-                  child: Text('Order ID',style:TextStyle(                            color: Colors.indigo[900], fontSize: 17,
-                      fontWeight: FontWeight.bold),),
+                  child: Text('Order ID',style:TextStyle(                            color: Colors.indigo[900], fontSize: 18,
+                  ),),
                 ))),
-                DataColumn(label: Container(child: Text('Created Date',style:TextStyle(                            color: Colors.indigo[900], fontSize: 17,
-                    fontWeight: FontWeight.bold),))),
-                DataColumn(label: Container(child: Text('Reference Number',style:TextStyle(                            color: Colors.indigo[900], fontSize: 17,
-                    fontWeight: FontWeight.bold),))),
-                DataColumn(label: Container(child: Text('Total Amount',style:TextStyle(                            color: Colors.indigo[900], fontSize: 17,
-                    fontWeight: FontWeight.bold),))),
+                DataColumn(label: Container(child: Text('Created Date',style:TextStyle(                            color: Colors.indigo[900], fontSize: 18,
+                ),))),
+                DataColumn(label: Container(child: Text('Reference Number',style:TextStyle(                            color: Colors.indigo[900], fontSize: 18,
+                ),))),
+                DataColumn(label: Container(child: Text('Total Amount',style:TextStyle(                            color: Colors.indigo[900], fontSize: 18,
+                ),))),
                 DataColumn(label: Container(child: Padding(
                   padding: const EdgeInsets.only(left: 2),
                   child: Text('Delivery Status',style:  TextStyle(
-                      color: Colors.indigo[900],
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold),),
+                    color: Colors.indigo[900],
+                    fontSize: 18,
+                  ),),
                 ))),
               ],
               rows:  _filteredData.skip((currentPage - 1) * itemsPerPage)
@@ -1298,6 +1339,5 @@ class DashboardCounts {
   }
 }
 
- 
 
 
